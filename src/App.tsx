@@ -1,23 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import FileSaver from "file-saver";
+import { Document, Packer, Paragraph, TextRun } from "docx";
 
 function App() {
+  function generateDoc(){
+    console.log('teste');
+    const doc = new Document({
+      sections: [
+          {
+              properties: {},
+              children: [
+                  new Paragraph({
+                      children: [
+                          new TextRun({text: 'Novo Relatorio', size: 12}),
+                      ],
+                  }),
+                //   new Paragraph({
+                //     children: [
+                //         new TextRun({
+                //             text: "Foo Bar",
+                //             bold: true,
+                //         }),
+                //         new TextRun({
+                //             text: "\nNovo teste",
+                //             bold: true,
+                //         }),
+                //     ],
+                // }),
+              ],
+          },
+      ],
+  });
+
+  Packer.toBlob(doc).then((blob) => {
+    FileSaver.saveAs(blob, "example.docx")
+});
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <button onClick={generateDoc}>clique aqui</button>
       </header>
     </div>
   );
