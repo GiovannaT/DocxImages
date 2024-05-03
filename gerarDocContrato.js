@@ -12,6 +12,8 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
     }
 
     let task = JSON.parse(data);
+    var tableRows = [];
+    // var executorsSkills = new Set();
 
     const countDays = () => {
         var startDate = new Date(task[0].initial_date);
@@ -26,11 +28,11 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
 
     const getCompany = async () => {
         try {
-            const response = await axios.get(`https://3337-avanciconstru-apiserver-0ae2jz7xl1m.ws-us110.gitpod.io/company?id=${company[0].company_id}`, { 
+            const response = await axios.get(`https://3337-avanciconstru-apiserver-0ae2jz7xl1m.ws-us110.gitpod.io/company?id=${company[0].company_id}`, {
                 headers: {
                 'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQxNjc5MjAsImV4cCI6MTc2NjAwNzkyMCwic3ViIjoiZjM1ZDg2M2QtMmI4My00MGM4LWI4ZDUtM2ExNzU5YTU2NTc2In0.jD1gKQzKtfFAXx2rGEMEqfuYdVcvGa_EB74jmvGpQpc`
             }});
-            return response.data[0]; 
+            return response.data[0];
 
         } catch (error) {
             console.error('erro')
@@ -40,11 +42,9 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
     }
     const companyData = await getCompany();
 
-    var tableRows = []
-
     const { Document, Packer, Paragraph, Table, TextRun, TableRow, TableCell, ShadingType, SectionType, HeadingLevel, AlignmentType, LevelFormat, WidthType} = docx;
     const doc = new Document({
-        
+
         creator: "Usuário criador",
         description: `Contrato`,
         title: 'Contrato',
@@ -150,7 +150,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         new TextRun({text: "CLÁUSULA 1ª – DAS PARTES –", bold: true}),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                         // after: 200
                     },
                 }),
@@ -164,7 +164,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                 }),
                 new Paragraph({
                     spacing: {
-                        before: 200, 
+                        before: 200,
                         after: 200
                     },
                     children: [
@@ -182,7 +182,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                 }),
                 new Paragraph({
                     spacing: {
-                        before: 200, 
+                        before: 200,
                         after: 200
                     },
                     children: [
@@ -194,23 +194,23 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         new TextRun({text: "CLÁUSULA 2ª – DO OBJETO –", bold: true}),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
-                }), 
+                }),
                 new Paragraph({
                     children: [
-                        new TextRun(`Por meio deste contrato, a CONTRATADA se compromete a prestar ao CONTRATANTE os seguintes serviços: 
+                        new TextRun(`Por meio deste contrato, a CONTRATADA se compromete a prestar ao CONTRATANTE os seguintes serviços:
                         `),
                     ],
-                }), 
+                }),
                 new Paragraph({
                     children: task[0].task_service_orders.map(service => {
                         return new TextRun({text: `${service.service_order.service.description}; `, bold: true})
                     })
-                }), 
+                }),
                 new Paragraph({
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                     children: [
                         new TextRun(`§ 1º. A `),
@@ -223,7 +223,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                 }),
                 new Paragraph({
                     spacing: {
-                        before: 200, 
+                        before: 200,
                         after: 200
                     },
                     children: [
@@ -237,13 +237,13 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                 new Paragraph({
                     children: [
                         new TextRun({
-                            text:"CLÁUSULA 3ª – DO PRAZO –", 
+                            text:"CLÁUSULA 3ª – DO PRAZO –",
                             bold:true}),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
-                }), 
+                }),
                 new Paragraph({
                     children: [
                         new TextRun({
@@ -263,31 +263,31 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                             bold: true,
                         })
                     ],
-                }), 
+                }),
                 new Paragraph({
                     children: [
                         new TextRun(`O serviço prestado deverá ocorrer da seguinte forma:`),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
-                }), 
+                }),
                 new Paragraph({
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                     children: [
-                        new TextRun(`§ 1º. Ao final do prazo acima referido, poderá o contrato ser renovado em mútuo acordo, devendo constar em termo aditivo o novo prazo acordado.             
+                        new TextRun(`§ 1º. Ao final do prazo acima referido, poderá o contrato ser renovado em mútuo acordo, devendo constar em termo aditivo o novo prazo acordado.
                         `),
                     ],
-                }), 
+                }),
                 new Paragraph({
                     spacing: {
-                        before: 200, 
+                        before: 200,
                         after: 200
                     },
                     children: [
-                        new TextRun(`§ 2º. Caso não ocorra a renovação pelas partes no final do prazo acima referido, este contrato será automaticamente rescindido sem que haja a necessidade de aviso prévio.             
+                        new TextRun(`§ 2º. Caso não ocorra a renovação pelas partes no final do prazo acima referido, este contrato será automaticamente rescindido sem que haja a necessidade de aviso prévio.
                         `),
                     ],
                 }),
@@ -298,9 +298,9 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                             bold: true}),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
-                }), 
+                }),
                 new Paragraph({
                     children: [
                         new TextRun(`Pela prestação dos serviços o `),
@@ -343,9 +343,9 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         }),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
-                }), 
+                }),
                 new Paragraph({
                     children: [
                         new TextRun({
@@ -353,9 +353,9 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                             bold: true,}),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
-                }), 
+                }),
                 new Paragraph({
                     children: [
                         new TextRun(`Sem prejuízo de outras disposições deste contrato, constituem obrigações da `),
@@ -366,85 +366,85 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                     ],
                 }),
                 new Paragraph({
-                    indent: { 
-                        left: 300, 
+                    indent: {
+                        left: 300,
                     },
                     children: [
                         new TextRun(`A. Prestar os serviços contratados na forma e modo ajustados, dentro das normas, de segurança do trabalho, e NRs aplicáveis, com profissionalismo, retorno dos serviços realizados, por meio de relatórios fotográficos, filmagens, dando plena e total garantia dos mesmos; nos termos da Lei do Código do Consumidor.`),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
-                    indent: { 
-                        left: 300, 
+                    indent: {
+                        left: 300,
                     },
                     children: [
-                        new TextRun(`B.	Executar os serviços contratados utilizando a melhor didática e aplicabilidade, visando sempre atingir o melhor resultado, sob sua exclusiva responsabilidade, sendo-lhe vedada a transferência dos mesmos a terceiros, sem prévia e expressa concordância do CONTRATANTE;       
+                        new TextRun(`B.	Executar os serviços contratados utilizando a melhor didática e aplicabilidade, visando sempre atingir o melhor resultado, sob sua exclusiva responsabilidade, sendo-lhe vedada a transferência dos mesmos a terceiros, sem prévia e expressa concordância do CONTRATANTE;
                         `),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
-                    indent: { 
-                        left: 300, 
+                    indent: {
+                        left: 300,
                     },
                     children: [
-                        new TextRun(`C.	Ser responsável pelos atos praticados por seus responsáveis, bem como pelos danos que os mesmos venham a causar para o CONTRATANTE, desde que comprovados, em decorrência da prestação dos serviços prestados neste contrato;     
+                        new TextRun(`C.	Ser responsável pelos atos praticados por seus responsáveis, bem como pelos danos que os mesmos venham a causar para o CONTRATANTE, desde que comprovados, em decorrência da prestação dos serviços prestados neste contrato;
                         `),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
-                    indent: { 
-                        left: 300, 
+                    indent: {
+                        left: 300,
                     },
                     children: [
                         new TextRun(`D.	Cumprir todas as determinações impostas pelas autoridades públicas competentes;
                         `),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
-                    indent: { 
-                        left: 300, 
+                    indent: {
+                        left: 300,
                     },
                     children: [
                         new TextRun(`E.	Arcar devidamente, nos termos da legislação trabalhista, com a remuneração e demais verbas laborais, tais como INSS, devidas a seus subordinados, inclusive encargos fiscais e previdenciários referentes às relações de trabalho;
                         `),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
-                    indent: { 
-                        left: 300, 
+                    indent: {
+                        left: 300,
                     },
                     children: [
                         new TextRun(`F.	Arcar com todas as despesas de natureza tributária decorrentes dos serviços especificados neste contrato;
                         `),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
-                    indent: { 
-                        left: 300, 
+                    indent: {
+                        left: 300,
                     },
                     children: [
                         new TextRun(`G.	Fornecer os equipamentos necessários à prestação dos serviços, ou em comum acordo, usar as ferramentas do CONTRATANTE, sob sua responsabilidade de uso e devolução no mesmo estado.`),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
@@ -454,7 +454,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                             bold: true}),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
@@ -467,27 +467,27 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                     ],
                 }),
                 new Paragraph({
-                    indent: { 
-                        left: 300, 
+                    indent: {
+                        left: 300,
                     },
                     children: [
                         new TextRun(`A.	Fornecer à CONTRATADA todas as informações necessárias à realização do serviço, devendo especificar os detalhes necessários à perfeita execução do mesmo, e a forma de como ele deve ser entregue;
                         `),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
-                    indent: { 
-                        left: 300, 
+                    indent: {
+                        left: 300,
                     },
                     children: [
                         new TextRun(`B.	Efetuar o pagamento, nas datas e nos termos definidos neste contrato.
                         `),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
@@ -497,7 +497,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         bold: true,}),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
@@ -512,7 +512,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         `),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
@@ -521,7 +521,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         `),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
@@ -530,7 +530,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         `),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
@@ -539,7 +539,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         `, bold:true,}),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
@@ -554,7 +554,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         `),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
@@ -563,7 +563,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         `, bold: true,}),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
@@ -573,41 +573,41 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                     ],
                 }),
                 new Paragraph({
-                    indent: { 
-                        left: 300, 
+                    indent: {
+                        left: 300,
                     },
                     children: [
                         new TextRun(`A.	Por insolvência, impetração ou solicitação de concordata, ou falência, de qualquer uma das partes;
                         `),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
-                    indent: { 
-                        left: 300, 
+                    indent: {
+                        left: 300,
                     },
                     children: [
                         new TextRun(`B.	Por qualquer impossibilidade da continuação do contrato, motivada por força maior ou caso fortuito.
                         `),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
-                    indent: { 
-                        left: 300, 
+                    indent: {
+                        left: 300,
                     },
                     children: [
                         new TextRun(`C.	Este contrato é particular, não tendo o CONTRATANTE, qualquer vínculo empregatício com a
                         CONTRATADA, sendo o CONTRATADA, remunerado por diária, conforme acordado entre as partes.
-                        
+
                         `),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
@@ -616,7 +616,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         `, bold:true}),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
@@ -631,7 +631,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         `),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
@@ -640,7 +640,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         `),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
@@ -649,7 +649,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         `, bold: true}),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
@@ -660,11 +660,11 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                 }),
                 new Paragraph({
                     children: [
-                        new TextRun(`Por estarem assim certos e ajustados, firmam os signatários este instrumento em 02 (duas) vias de igual forma. 
+                        new TextRun(`Por estarem assim certos e ajustados, firmam os signatários este instrumento em 02 (duas) vias de igual forma.
                         `),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
@@ -672,7 +672,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         new TextRun(`CUIABÁ-MT, ${new Date().getDate()}/${new Date().getMonth()+1}/${new Date().getFullYear()}`),
                     ],
                     spacing: {
-                        before: 200, 
+                        before: 200,
                     },
                 }),
                 new Paragraph({
@@ -681,7 +681,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                     ],
                     alignment: AlignmentType.CENTER,
                     spacing: {
-                        before: 300, 
+                        before: 300,
                     },
                 }),
                 new Paragraph({
@@ -698,7 +698,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                     ],
                     alignment: AlignmentType.CENTER,
                     spacing: {
-                        before: 400, 
+                        before: 400,
                     },
                 }),
                 new Paragraph({
@@ -714,7 +714,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                     ],
                     alignment: AlignmentType.CENTER,
                     spacing: {
-                        before: 300, 
+                        before: 300,
                     },
                 }),
                 new Paragraph({
@@ -731,7 +731,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                     ],
                     alignment: AlignmentType.CENTER,
                     spacing: {
-                        before: 400, 
+                        before: 400,
                     },
                 }),
                 new Paragraph({
@@ -747,7 +747,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                     ],
                     alignment: AlignmentType.CENTER,
                     spacing: {
-                        before: 300, 
+                        before: 300,
                     },
                 }),
                 new Paragraph({
@@ -764,7 +764,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                     ],
                     alignment: AlignmentType.CENTER,
                     spacing: {
-                        before: 400, 
+                        before: 400,
                     },
                 }),
                 new Paragraph({
@@ -788,7 +788,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                     ],
                     alignment: AlignmentType.CENTER,
                     spacing: {
-                        before: 400, 
+                        before: 400,
                     },
                 }),
                 new Paragraph({
@@ -812,7 +812,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                     ],
                     alignment: AlignmentType.CENTER,
                     spacing: {
-                        before: 400, 
+                        before: 400,
                     },
                 }),
                 new Paragraph({
@@ -822,661 +822,675 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                     alignment: AlignmentType.CENTER,
 
                 }),
-                new Table({
-                    width: {
-                        size: 9000,
-                        type: WidthType.DXA,
-                    },
-                    rows: [
-                        new TableRow({
-                            tableHeader: true,
-                            children: [
-                                new TableCell({
-                                    height: {value: 50, type: WidthType},
-                                    width: {
-                                        size: 8000,
-                                        type: WidthType.DXA,
-                                    },
-                                    shading: {
-                                        fill: "D9D9D9",
-                                        type: ShadingType.CLEAR,
-                                        color: "auto",
-                                    },
-                                    columnSpan: 2,
-                                    children: [new Paragraph({
-                                        alignment: AlignmentType.CENTER,
-                                        pageBreakBefore: true,
-                                        text: `FICHA DE CONTROLE DE EPI'S`,
-                                        bold: true,
-                                    }),],
-                                }),
-                            ],
-                        }),
-                        new TableRow({
-                            tableHeader: true,
-                            height: {value: 50, type: WidthType},
-                            width: {
-                                size: 8000,
-                                type: WidthType.DXA,
-                            },
-                            children: [
-                                new TableCell({
-                                    height: {value: 50, type: WidthType},
-                                    width: {
-                                        size: 8000,
-                                        type: WidthType.DXA,
-                                    },
-                                    children: [new Paragraph(`NOME: ${leader[0].executor.name}`)],
-                                }),
-                                new TableCell({
-                                    height: {value: 50, type: WidthType},
-                                    width: {
-                                        size: 8000,
-                                        type: WidthType.DXA,
-                                    },
-                                    children: [new Paragraph(`FUNÇÃO: ${leader[0].executor.skill.name}`)],
-                                }),
-                            ],
-                        }),
-                        new TableRow({
-                            tableHeader: true,
-                            height: {value: 50, type: WidthType},
-                            width: {
-                                size: 8000,
-                                type: WidthType.DXA,
-                            },
-                            children: [
-                                new TableCell({
-                                    height: {value: 50, type: WidthType},
-                                    width: {
-                                        size: 8000,
-                                        type: WidthType.DXA,
-                                    },
-                                    shading: {
-                                        fill: "D9D9D9",
-                                        type: ShadingType.CLEAR,
-                                        color: "auto",
-                                    },
-                                    columnSpan: 2,
-                                    children: [new Paragraph({
-                                        alignment: AlignmentType.CENTER,
-                                        text: `TERMO DE RESPONSABILIDADE`,
-                                        bold: true,
-                                    }),],
-                                }),
-                            ],
-                        }),
-                        new TableRow({
-                            height: {value: 50, type: WidthType},
-                            width: {
-                                size: 8000,
-                                type: WidthType.DXA,
-                            },
-                            children: [
-                                new TableCell({
-                                    borders: {
-                                        bottom: {
-                                            color: "ffffff",
-                                        },
-                                    },
-                                    height: {value: 50, type: WidthType},
-                                    width: {
-                                        size: 8000,
-                                        type: WidthType.DXA,
-                                    },
-                                    columnSpan: 2,
-                                    children: [
-                                        new Paragraph({
-                                        text: `Recebi de HABIT CONSTRUÇÕES E SERVIÇOS EIRELI , para meu uso obrigatório os EPI's (Equipamentos de proteção Individual) e EPC's (Equipamentos de2 proteção coletiva) constantes nesta ficha, o qual obrigo-me a utiliza-los corretamente durante o tempo que permanecerem ao meu dispor, observando as medidas gerais de disciplina e uso que integram a NR-06 - Equipamento de Proteção Individual - EPI's - da portaria n.º 3.214 de 08/06/1978.`,
-                                        }),
-                                        new Paragraph(
-                                            {
-                                            text: "1. Usar o EPI Indicado apenas para as finalidades a que se destina.",
-                                            indent: { 
-                                                left: 300, 
-                                            },
-                                        }),
-                                        new Paragraph({
-                                            text: "2. Somente iniciar o serviço se estiver usando os EPI's indicados na tarefa a realizar.",
-                                            indent: { 
-                                                left: 300, 
-                                            },
-                                        }),
-                                        new Paragraph({
-                                            text: "3. Responsabilizar-se pela guarda e conservação dos EPI's.",
-                                            indent: { 
-                                                left: 300, 
-                                            },
-                                        }),
-                                        new Paragraph({
-                                            text: "4. Comunicar qualquer dano ou extravio no EPI, para aquisição de outro.",
-                                            indent: { 
-                                                left: 300, 
-                                            },
-                                        }),
-                                        new Paragraph({
-                                            text: "5. Responder perante a empresa pelo custo integral ao preço de mercado do dia, quando:",
-                                            indent: { 
-                                                left: 300, 
-                                            },
-                                        }),
-                                        new Paragraph({
-                                            text: "a)  Alegar Perda ou Extravio",
-                                            indent: { 
-                                                left: 500, 
-                                            },
-                                        }),
-                                        new Paragraph({
-                                            text: "b)  Alterar seu padrão",
-                                            indent: { 
-                                                left: 500, 
-                                            },
-                                        }),
-                                        new Paragraph({
-                                            text: "c)  Inutilizá-lo por procedimento inadequado",
-                                            indent: { 
-                                                left: 500, 
-                                            },
-                                        }),
-                                        new Paragraph({
-                                            text: "d)  Desligar-se da empresa sem devolver o EPI.",
-                                            indent: { 
-                                                left: 500, 
-                                            },
-                                        }),
-                                        new Paragraph({
-                                            text: "6. A recusa em não usar os EPI's, gerará punição em lei (CLT art. 482)",
-                                            indent: { 
-                                                left: 300, 
-                                            },
-                                        }),
-                                    ],
-                                }),
-                            ],
-                        }),
-                        new TableRow({
-                            children:[
-                                new TableCell({
-                                    columnSpan: 2,
-                                    borders: {
-                                        top: {
-                                            color: "ffffff",
-                                        },
-                                        bottom: {
-                                            color: "ffffff",
-                                        },
-                                    },
-                                    children:[
-                                       new Paragraph({
-                                        spacing:{
-                                            before: 200,
-                                            after: 200,
-                                        },
-                                        children: [
-                                            new TextRun({
-                                                text: "Declaro haver recebido treinamento sobre o uso dos EPI's e estar de pleno acordo com as normas dos equipamentos de proteção individual, acima estipulado.",
-                                                bold: true,
-                                                })
-                                        ]
-                                       }), 
-                                    ]
-                                }
-                                ),
-                            ]
-                        }),
-                        new TableRow({
-                            children:[
-                                new TableCell({
-                                    borders: {
-                                        top: {
-                                            color: "ffffff",
-                                        },
-                                        bottom: {
-                                            color: "ffffff",
-                                        },
-                                    },
-                                    columnSpan: 2,
-                                    children:[
-                                         new Table({
-                                        width: {
-                                            size: 9000,
-                                            type: WidthType.DXA,
-                                        },
-                                        rows: [
-                                            new TableRow({
-                                                cantSplit: true,
-                                                tableHeader: true,
-                                                children: [
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        borders: {
-                                                            bottom: {
-                                                                color: "ffffff",
-                                                            },
-                                                        },
-                                                        shading: {
-                                                            fill: "D9D9D9",
-                                                            type: ShadingType.CLEAR,
-                                                            color: "auto",
-                                                        },
-                                                        children: [new Paragraph({
-                                                            alignment: AlignmentType.CENTER,
-                                                            text: `QUANT.`,
-                                                            bold: true,
-                                                        }),],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        shading: {
-                                                            fill: "D9D9D9",
-                                                            type: ShadingType.CLEAR,
-                                                            color: "auto",
-                                                        },
-                                                        borders: {
-                                                            bottom: {
-                                                                color: "ffffff",
-                                                            },
-                                                        },
-                                                        children: [new Paragraph({
-                                                            alignment: AlignmentType.CENTER,
-                                                            text: `TIPO DE EPI`,
-                                                            bold: true,
-                                                        }),],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType}, 
-                                                        shading: {
-                                                            fill: "D9D9D9",
-                                                            type: ShadingType.CLEAR,
-                                                            color: "auto",
-                                                        },
-                                                        borders: {
-                                                            bottom: {
-                                                                color: "ffffff",
-                                                            },
-                                                        },
-                                                        children: [new Paragraph({
-                                                            alignment: AlignmentType.CENTER,
-                                                            text: `Nº C.A.`,
-                                                            bold: true,
-                                                        }),],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        shading: {
-                                                            fill: "D9D9D9",
-                                                            type: ShadingType.CLEAR,
-                                                            color: "auto",
-                                                        },
-                                                        borders: {
-                                                            bottom: {
-                                                                color: "ffffff",
-                                                            },
-                                                        },
-                                                        children: [new Paragraph({
-                                                            alignment: AlignmentType.CENTER,
-                                                            text: `Data entrega`,
-                                                            bold: true,
-                                                        }),],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType}, 
-                                                        shading: {
-                                                            fill: "D9D9D9",
-                                                            type: ShadingType.CLEAR,
-                                                            color: "auto",
-                                                        },
-                                                        borders: {
-                                                            bottom: {
-                                                                color: "ffffff",
-                                                            },
-                                                        },
-                                                        children: [new Paragraph({
-                                                            alignment: AlignmentType.CENTER,
-                                                            text: `Data devolução`,
-                                                            bold: true,
-                                                        }),],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        shading: {
-                                                            fill: "D9D9D9",
-                                                            type: ShadingType.CLEAR,
-                                                            color: "auto",
-                                                        },
-                                                        children: [new Paragraph({
-                                                            alignment: AlignmentType.CENTER,
-                                                            text: `Motivo`,
-                                                            bold: true,
-                                                        }),],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        shading: {
-                                                            fill: "D9D9D9",
-                                                            type: ShadingType.CLEAR,
-                                                            color: "auto",
-                                                        },
-                                                        columnSpan: 2,
-                                                        borders: {
-                                                            bottom: {
-                                                                color: "ffffff",
-                                                            },
-                                                        },
-                                                        children: [new Paragraph({
-                                                            alignment: AlignmentType.CENTER,
-                                                            text: `Nº C.A. Novo Equipamento`,
-                                                            bold: true,
-                                                        }),],
-                                                    }),
-                                                ],
-                                            }),
-                                            new TableRow({
-                                                children: [
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        shading: {
-                                                            fill: "D9D9D9",
-                                                            type: ShadingType.CLEAR,
-                                                            color: "auto",
-                                                        },
-                                                        borders: {
-                                                            top: {
-                                                                color: "ffffff",
-                                                            },
-                                                            bottom: {
-                                                                color: "ffffff",
-                                                            },
-                                                        },
-                                                        children: [],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        shading: {
-                                                            fill: "D9D9D9",
-                                                            type: ShadingType.CLEAR,
-                                                            color: "auto",
-                                                        },
-                                                        borders: {
-                                                            top: {
-                                                                color: "ffffff",
-                                                            },
-                                                            bottom: {
-                                                                color: "ffffff",
-                                                            },
-                                                        },
-                                                        children: [],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        shading: {
-                                                            fill: "D9D9D9",
-                                                            type: ShadingType.CLEAR,
-                                                            color: "auto",
-                                                        },
-                                                        borders: {
-                                                            top: {
-                                                                color: "ffffff",
-                                                            },
-                                                            bottom: {
-                                                                color: "ffffff",
-                                                            },
-                                                        },
-                                                        children: [],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        shading: {
-                                                            fill: "D9D9D9",
-                                                            type: ShadingType.CLEAR,
-                                                            color: "auto",
-                                                        },
-                                                        borders: {
-                                                            top: {
-                                                                color: "ffffff",
-                                                            },
-                                                            bottom: {
-                                                                color: "ffffff",
-                                                            },
-                                                        },
-                                                        children: [],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        shading: {
-                                                            fill: "D9D9D9",
-                                                            type: ShadingType.CLEAR,
-                                                            color: "auto",
-                                                        },
-                                                        borders: {
-                                                            top: {
-                                                                color: "ffffff",
-                                                            },
-                                                            bottom: {
-                                                                color: "ffffff",
-                                                            },
-                                                        },
-                                                        children: [],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        shading: {
-                                                            fill: "D9D9D9",
-                                                            type: ShadingType.CLEAR,
-                                                            color: "auto",
-                                                        },
-                                                        children: [new Paragraph({
-                                                            alignment: AlignmentType.CENTER,
-                                                            text: `Substituição`,
-                                                            bold: true,
-                                                        }),],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        shading: {
-                                                            fill: "D9D9D9",
-                                                            type: ShadingType.CLEAR,
-                                                            color: "auto",
-                                                        },
-                                                        borders: {
-                                                            top: {
-                                                                color: "ffffff",
-                                                            },
-                                                            bottom: {
-                                                                color: "ffffff",
-                                                            },
-                                                        },
-                                                        children: [],
-                                                    }),
-                                                ]
-                                            }),
-                                            new TableRow({
-                                                children: [
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        children: [],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        children: [],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        children: [],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        children: [],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        children: [],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        children: [],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        children: [],
-                                                    }),
-                                                ]
-                                            }),
-                                            new TableRow({
-                                                children: [
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        children: [],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        children: [],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        children: [],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        children: [],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        children: [],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        children: [],
-                                                    }),
-                                                    new TableCell({
-                                                        height: {value: 50, type: WidthType},
-                                                        children: [],
-                                                    }),
-                                                ]
-                                            })
-                                        ]
-                                    }),
-                                    ]
-                                }),
-                            ]
-                        }),
-                        new TableRow({
-                            children:[
-                                new TableCell(
-                                   {
-                                    borders: {
-                                        top: {
-                                            color: "ffffff",
-                                        },
-                                    },
-                                    columnSpan: 2,
-                                    children: [
-                                        new Paragraph(
-                                            {
-                                                spacing:{
-                                                    before: 200,
-                                                    after: 200,
-                                                },
-                                                text: `Colaborador declara que possui todos os EPIs em ótimo estado para uso de acordo com sua função, _______`},
-                                        ),
-                                    ]
-                                   }
-                                )
-                            ]
-                        })
-                    ]
-                }),
-                new Paragraph({
-                    pageBreakBefore: true,
-                }),
-                new Table({
-                    width: {
-                        size: 9000,
-                        type: WidthType.DXA,
-                    },
-                    rows: [
-                        new TableRow({
-                            cantSplit: true,
-                            tableHeader: true,
-                            children: [
-                                new TableCell({
-                            columnSpan: 4,
 
-                                    children: [
-                                        new Paragraph({
-                                        alignment: AlignmentType.CENTER,
-                                        text: `Serviços`,
-                                        heading: HeadingLevel.HEADING_3,
-                                        })
-                                    ],
-                                }),
-                            ],
-                        }),
-                        new TableRow({
-                            cantSplit: true,
-                            tableHeader: true,
-                            children: [
-                                new TableCell({
-                                    children: [
-                                        new Paragraph({
-                                        alignment: AlignmentType.CENTER,
-                                        text: `Descrição`,
-                                        heading: HeadingLevel.HEADING_3,
-                                        })
-                                    ],
-                                }),
-                                new TableCell({
-                                    width: {
-                                        size: 1000,
-                                        type: WidthType.DXA,
-                                    },
-                                    children: [
-                                        new Paragraph({
-                                        alignment: AlignmentType.CENTER,
-                                        text: `Unidade`,
-                                        heading: HeadingLevel.HEADING_3,
-                                        })
-                                    ],
-                                }),
-                                new TableCell({
-                                    width: {
-                                        size: 1000,
-                                        type: WidthType.DXA,
-                                    },
-                                    children: [
-                                        new Paragraph({
-                                        alignment: AlignmentType.CENTER,
-                                        text: `Quantidade`,
-                                        heading: HeadingLevel.HEADING_3,
-                                        })
-                                    ],
-                                }),
-                                new TableCell({
-                                    width: {
-                                        size: 1000,
-                                        type: WidthType.DXA,
-                                    },
-                                    children: [
-                                        new Paragraph({
-                                        alignment: AlignmentType.CENTER,
-                                        text: `Valor`,
-                                        heading: HeadingLevel.HEADING_3,
-                                        })
-                                    ],
-                                }),
-                            ],
-                        }),
-                    ]
+                new Paragraph({
+
                 }),
             ]
         }],
     })
 
+    for (const executor of task[0].task_executors) {
+        if(executor.executor){
+            const getSkillProducts = async () => {
+                try {
+                    const response = await axios.get(`https://3337-avanciconstru-apiserver-0ae2jz7xl1m.ws-us110.gitpod.io/skillproducts?skill_id=${executor.executor.skill_id}`, {
+                        headers: {
+                            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQxNjc5MjAsImV4cCI6MTc2NjAwNzkyMCwic3ViIjoiZjM1ZDg2M2QtMmI4My00MGM4LWI4ZDUtM2ExNzU5YTU2NTc2In0.jD1gKQzKtfFAXx2rGEMEqfuYdVcvGa_EB74jmvGpQpc`
+                        }
+                    });
+                    return response.data;
+                } catch (error) {
+                    console.error('erro')
+                    console.error(error.response)
+                    return null;
+                }
+            }
+            const skillProducts = await getSkillProducts();
+
+            var productRows = []
+            skillProducts.forEach(product => {
+                productRows.push(
+                    new TableRow({
+                        children: [
+                            new TableCell({
+                                height: {value: 50, type: WidthType},
+                                children: [
+                                    new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        text: `1`,
+                                        bold: true,
+                                        }),
+                                ],
+                            }),
+                            new TableCell({
+                                height: {value: 50, type: WidthType},
+                                children: [
+                                    new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        text: `${product.product.description}.`,
+                                        bold: true,
+                                        }),
+                                ],
+                            }),
+                            new TableCell({
+                                height: {value: 50, type: WidthType},
+                                children: [],
+                            }),
+                            new TableCell({
+                                height: {value: 50, type: WidthType},
+                                children: [
+                                    new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        text: `${moment().format('DD/MM/YYYY')}.`,
+                                        bold: true,
+                                    }),
+                                ],
+                            }),
+                            new TableCell({
+                                height: {value: 50, type: WidthType},
+                                children: [],
+                            }),
+                            new TableCell({
+                                height: {value: 50, type: WidthType},
+                                children: [],
+                            }),
+                            new TableCell({
+                                height: {value: 50, type: WidthType},
+                                children: [],
+                            }),
+                        ]
+                    }),
+                )
+            })
+
+            tableRows = [
+                new TableRow({
+                    tableHeader: true,
+                    cantSplit:true,
+                    children: [
+                        new TableCell({
+                            height: {value: 50, type: WidthType},
+                            width: {
+                                size: 8000,
+                                type: WidthType.DXA,
+                            },
+                            shading: {
+                                fill: "D9D9D9",
+                                type: ShadingType.CLEAR,
+                                color: "auto",
+                            },
+                            columnSpan: 2,
+                            children: [new Paragraph({
+                                alignment: AlignmentType.CENTER,
+                                pageBreakBefore: true,
+                                text: `FICHA DE CONTROLE DE EPI'S`,
+                                bold: true,
+                            }),],
+                        }),
+                    ],
+                }),
+                new TableRow({
+                    tableHeader: true,
+                    height: {value: 50, type: WidthType},
+                    width: {
+                        size: 8000,
+                        type: WidthType.DXA,
+                    },
+                    children: [
+                        new TableCell({
+                            height: {value: 50, type: WidthType},
+                            width: {
+                                size: 8000,
+                                type: WidthType.DXA,
+                            },
+                            children: [
+                                new Paragraph(`NOME: ${executor.executor.name}`)
+                            ],
+                        }),
+                        new TableCell({
+                            height: {value: 50, type: WidthType},
+                            width: {
+                                size: 8000,
+                                type: WidthType.DXA,
+                            },
+                            children: [
+                                new Paragraph(`FUNÇÃO: ${executor.executor.skill.name}`)
+                            ],
+                        }),
+                    ],
+                }),
+                new TableRow({
+                    tableHeader: true,
+                    height: {value: 50, type: WidthType},
+                    width: {
+                        size: 8000,
+                        type: WidthType.DXA,
+                    },
+                    children: [
+                        new TableCell({
+                            height: {value: 50, type: WidthType},
+                            width: {
+                                size: 8000,
+                                type: WidthType.DXA,
+                            },
+                            shading: {
+                                fill: "D9D9D9",
+                                type: ShadingType.CLEAR,
+                                color: "auto",
+                            },
+                            columnSpan: 2,
+                            children: [new Paragraph({
+                                alignment: AlignmentType.CENTER,
+                                text: `TERMO DE RESPONSABILIDADE`,
+                                bold: true,
+                            }),],
+                        }),
+                    ],
+                }),
+                new TableRow({
+                    height: {value: 50, type: WidthType},
+                    width: {
+                        size: 8000,
+                        type: WidthType.DXA,
+                    },
+                    children: [
+                        new TableCell({
+                            borders: {
+                                bottom: {
+                                    color: "ffffff",
+                                },
+                            },
+                            height: {value: 50, type: WidthType},
+                            width: {
+                                size: 8000,
+                                type: WidthType.DXA,
+                            },
+                            columnSpan: 2,
+                            children: [
+                                new Paragraph({
+                                text: `Recebi de HABIT CONSTRUÇÕES E SERVIÇOS EIRELI , para meu uso obrigatório os EPI's (Equipamentos de proteção Individual) e EPC's (Equipamentos de2 proteção coletiva) constantes nesta ficha, o qual obrigo-me a utiliza-los corretamente durante o tempo que permanecerem ao meu dispor, observando as medidas gerais de disciplina e uso que integram a NR-06 - Equipamento de Proteção Individual - EPI's - da portaria n.º 3.214 de 08/06/1978.`,
+                                }),
+                                new Paragraph(
+                                    {
+                                    text: "1. Usar o EPI Indicado apenas para as finalidades a que se destina.",
+                                    indent: {
+                                        left: 300,
+                                    },
+                                }),
+                                new Paragraph({
+                                    text: "2. Somente iniciar o serviço se estiver usando os EPI's indicados na tarefa a realizar.",
+                                    indent: {
+                                        left: 300,
+                                    },
+                                }),
+                                new Paragraph({
+                                    text: "3. Responsabilizar-se pela guarda e conservação dos EPI's.",
+                                    indent: {
+                                        left: 300,
+                                    },
+                                }),
+                                new Paragraph({
+                                    text: "4. Comunicar qualquer dano ou extravio no EPI, para aquisição de outro.",
+                                    indent: {
+                                        left: 300,
+                                    },
+                                }),
+                                new Paragraph({
+                                    text: "5. Responder perante a empresa pelo custo integral ao preço de mercado do dia, quando:",
+                                    indent: {
+                                        left: 300,
+                                    },
+                                }),
+                                new Paragraph({
+                                    text: "a)  Alegar Perda ou Extravio",
+                                    indent: {
+                                        left: 500,
+                                    },
+                                }),
+                                new Paragraph({
+                                    text: "b)  Alterar seu padrão",
+                                    indent: {
+                                        left: 500,
+                                    },
+                                }),
+                                new Paragraph({
+                                    text: "c)  Inutilizá-lo por procedimento inadequado",
+                                    indent: {
+                                        left: 500,
+                                    },
+                                }),
+                                new Paragraph({
+                                    text: "d)  Desligar-se da empresa sem devolver o EPI.",
+                                    indent: {
+                                        left: 500,
+                                    },
+                                }),
+                                new Paragraph({
+                                    text: "6. A recusa em não usar os EPI's, gerará punição em lei (CLT art. 482)",
+                                    indent: {
+                                        left: 300,
+                                    },
+                                }),
+                            ],
+                        }),
+                    ],
+                }),
+                new TableRow({
+                    children:[
+                        new TableCell({
+                            columnSpan: 2,
+                            borders: {
+                                top: {
+                                    color: "ffffff",
+                                },
+                                bottom: {
+                                    color: "ffffff",
+                                },
+                            },
+                            children:[
+                                new Paragraph({
+                                spacing:{
+                                    before: 200,
+                                    after: 200,
+                                },
+                                children: [
+                                    new TextRun({
+                                        text: "Declaro haver recebido treinamento sobre o uso dos EPI's e estar de pleno acordo com as normas dos equipamentos de proteção individual, acima estipulado.",
+                                        bold: true,
+                                        })
+                                ]
+                                }),
+                            ]
+                        }
+                        ),
+                    ]
+                }),
+                new TableRow({
+                    children:[
+                        new TableCell({
+                            borders: {
+                                top: {
+                                    color: "ffffff",
+                                },
+                                bottom: {
+                                    color: "ffffff",
+                                },
+                            },
+                            columnSpan: 2,
+                            children:[
+                                new Table({
+                                    columnWidths: [3505, 5505],
+                                    width: {
+                                        size: 9000,
+                                        type: WidthType.DXA,
+                                    },
+                                    rows: [
+                                        new TableRow({
+                                            cantSplit: true,
+                                            tableHeader: true,
+                                            children: [
+                                                new TableCell({
+                                                    tableHeader: true,
+                                                    height: {value: 50, type: WidthType},
+                                                    borders: {
+                                                        bottom: {
+                                                            color: "ffffff",
+                                                        },
+                                                    },
+                                                    shading: {
+                                                        fill: "D9D9D9",
+                                                        type: ShadingType.CLEAR,
+                                                        color: "auto",
+                                                    },
+                                                    children: [
+                                                        new Paragraph({
+                                                        alignment: AlignmentType.CENTER,
+                                                        text: `QUANT.`,
+                                                        bold: true,
+                                                        }),
+                                                    ],
+                                                }),
+                                                new TableCell({
+                                                    tableHeader: true,
+                                                    height: {value: 50, type: WidthType},
+                                                    shading: {
+                                                        fill: "D9D9D9",
+                                                        type: ShadingType.CLEAR,
+                                                        color: "auto",
+                                                    },
+                                                    borders: {
+                                                        bottom: {
+                                                            color: "ffffff",
+                                                        },
+                                                    },
+                                                    children: [new Paragraph({
+                                                        alignment: AlignmentType.CENTER,
+                                                        text: `TIPO DE EPI`,
+                                                        bold: true,
+                                                    }),],
+                                                }),
+                                                new TableCell({
+                                                    tableHeader: true,
+                                                    height: {value: 50, type: WidthType},
+                                                    shading: {
+                                                        fill: "D9D9D9",
+                                                        type: ShadingType.CLEAR,
+                                                        color: "auto",
+                                                    },
+                                                    borders: {
+                                                        bottom: {
+                                                            color: "ffffff",
+                                                        },
+                                                    },
+                                                    children: [new Paragraph({
+                                                        alignment: AlignmentType.CENTER,
+                                                        text: `Nº C.A.`,
+                                                        bold: true,
+                                                    }),],
+                                                }),
+                                                new TableCell({
+                                                    tableHeader: true,
+                                                    height: {value: 50, type: WidthType},
+                                                    shading: {
+                                                        fill: "D9D9D9",
+                                                        type: ShadingType.CLEAR,
+                                                        color: "auto",
+                                                    },
+                                                    borders: {
+                                                        bottom: {
+                                                            color: "ffffff",
+                                                        },
+                                                    },
+                                                    children: [new Paragraph({
+                                                        alignment: AlignmentType.CENTER,
+                                                        text: `Data entrega`,
+                                                        bold: true,
+                                                    }),],
+                                                }),
+                                                new TableCell({
+                                                    tableHeader: true,
+                                                    height: {value: 50, type: WidthType},
+                                                    shading: {
+                                                        fill: "D9D9D9",
+                                                        type: ShadingType.CLEAR,
+                                                        color: "auto",
+                                                    },
+                                                    borders: {
+                                                        bottom: {
+                                                            color: "ffffff",
+                                                        },
+                                                    },
+                                                    children: [new Paragraph({
+                                                        alignment: AlignmentType.CENTER,
+                                                        text: `Data devolução`,
+                                                        bold: true,
+                                                    }),],
+                                                }),
+                                                new TableCell({
+                                                    tableHeader: true,
+                                                    height: {value: 50, type: WidthType},
+                                                    shading: {
+                                                        fill: "D9D9D9",
+                                                        type: ShadingType.CLEAR,
+                                                        color: "auto",
+                                                    },
+                                                    children: [new Paragraph({
+                                                        alignment: AlignmentType.CENTER,
+                                                        text: `Motivo`,
+                                                        bold: true,
+                                                    }),],
+                                                }),
+                                                new TableCell({
+                                                    tableHeader: true,
+                                                    height: {value: 50, type: WidthType},
+                                                    shading: {
+                                                        fill: "D9D9D9",
+                                                        type: ShadingType.CLEAR,
+                                                        color: "auto",
+                                                    },
+                                                    columnSpan: 2,
+                                                    borders: {
+                                                        bottom: {
+                                                            color: "ffffff",
+                                                        },
+                                                    },
+                                                    children: [new Paragraph({
+                                                        alignment: AlignmentType.CENTER,
+                                                        text: `Nº C.A. Novo Equipamento`,
+                                                        bold: true,
+                                                    }),],
+                                                }),
+                                            ],
+                                        }),
+                                        new TableRow({
+                                            children: [
+                                                new TableCell({
+                                                    height: {value: 50, type: WidthType},
+                                                    shading: {
+                                                        fill: "D9D9D9",
+                                                        type: ShadingType.CLEAR,
+                                                        color: "auto",
+                                                    },
+                                                    borders: {
+                                                        top: {
+                                                            color: "ffffff",
+                                                        },
+                                                        bottom: {
+                                                            color: "ffffff",
+                                                        },
+                                                    },
+                                                    children: [],
+                                                }),
+                                                new TableCell({
+                                                    height: {value: 50, type: WidthType},
+                                                    shading: {
+                                                        fill: "D9D9D9",
+                                                        type: ShadingType.CLEAR,
+                                                        color: "auto",
+                                                    },
+                                                    borders: {
+                                                        top: {
+                                                            color: "ffffff",
+                                                        },
+                                                        bottom: {
+                                                            color: "ffffff",
+                                                        },
+                                                    },
+                                                    children: [],
+                                                }),
+                                                new TableCell({
+                                                    height: {value: 50, type: WidthType},
+                                                    shading: {
+                                                        fill: "D9D9D9",
+                                                        type: ShadingType.CLEAR,
+                                                        color: "auto",
+                                                    },
+                                                    borders: {
+                                                        top: {
+                                                            color: "ffffff",
+                                                        },
+                                                        bottom: {
+                                                            color: "ffffff",
+                                                        },
+                                                    },
+                                                    children: [],
+                                                }),
+                                                new TableCell({
+                                                    height: {value: 50, type: WidthType},
+                                                    shading: {
+                                                        fill: "D9D9D9",
+                                                        type: ShadingType.CLEAR,
+                                                        color: "auto",
+                                                    },
+                                                    borders: {
+                                                        top: {
+                                                            color: "ffffff",
+                                                        },
+                                                        bottom: {
+                                                            color: "ffffff",
+                                                        },
+                                                    },
+                                                    children: [],
+                                                }),
+                                                new TableCell({
+                                                    height: {value: 50, type: WidthType},
+                                                    shading: {
+                                                        fill: "D9D9D9",
+                                                        type: ShadingType.CLEAR,
+                                                        color: "auto",
+                                                    },
+                                                    borders: {
+                                                        top: {
+                                                            color: "ffffff",
+                                                        },
+                                                        bottom: {
+                                                            color: "ffffff",
+                                                        },
+                                                    },
+                                                    children: [],
+                                                }),
+                                                new TableCell({
+                                                    height: {value: 50, type: WidthType},
+                                                    shading: {
+                                                        fill: "D9D9D9",
+                                                        type: ShadingType.CLEAR,
+                                                        color: "auto",
+                                                    },
+                                                    children: [new Paragraph({
+                                                        alignment: AlignmentType.CENTER,
+                                                        text: `Substituição`,
+                                                        bold: true,
+                                                    }),],
+                                                }),
+                                                new TableCell({
+                                                    height: {value: 50, type: WidthType},
+                                                    shading: {
+                                                        fill: "D9D9D9",
+                                                        type: ShadingType.CLEAR,
+                                                        color: "auto",
+                                                    },
+                                                    borders: {
+                                                        top: {
+                                                            color: "ffffff",
+                                                        },
+                                                        bottom: {
+                                                            color: "ffffff",
+                                                        },
+                                                    },
+                                                    children: [],
+                                                }),
+                                            ]
+                                        }),
+                                        ...productRows,
+                                        new TableRow({
+                                            children: [
+                                                new TableCell({
+                                                    height: {value: 50, type: WidthType},
+                                                    children: [],
+                                                }),
+                                                new TableCell({
+                                                    height: {value: 50, type: WidthType},
+                                                    children: [new Paragraph({
+                                                        alignment: AlignmentType.CENTER,
+                                                        text: `O: Outro(descrever motivo)`,
+                                                        bold: true,
+                                                    }),],
+                                                }),
+                                                new TableCell({
+                                                    height: {value: 50, type: WidthType},
+                                                    children: [
+                                                        new Paragraph({
+                                                        alignment: AlignmentType.CENTER,
+                                                        text: `I: Inadequado`,
+                                                        bold: true,
+                                                        }),
+                                                    ],
+                                                }),
+                                                new TableCell({
+                                                    height: {value: 50, type: WidthType},
+                                                    children: [
+                                                        new Paragraph({
+                                                        alignment: AlignmentType.CENTER,
+                                                        text: `T: Tempo de Uso`,
+                                                        bold: true,
+                                                        }),
+                                                    ],
+                                                }),
+                                                new TableCell({
+                                                    height: {value: 50, type: WidthType},
+                                                    children: [
+                                                        new Paragraph({
+                                                        alignment: AlignmentType.CENTER,
+                                                        text: `D: Defeito`,
+                                                        bold: true,
+                                                        }),
+                                                    ],
+                                                }),
+                                                new TableCell({
+                                                    height: {value: 50, type: WidthType},
+                                                    children: [],
+                                                }),
+                                                new TableCell({
+                                                    height: {value: 50, type: WidthType},
+                                                    children: [],
+                                                }),
+                                            ]
+                                        }),
+                                    ]
+                            }),
+                            ]
+                        }),
+                    ]
+                }),
+                new TableRow({
+                    children:[
+                        new TableCell(
+                            {
+                            borders: {
+                                top: {
+                                    color: "ffffff",
+                                },
+                            },
+                            columnSpan: 2,
+                            children: [
+                                new Paragraph(
+                                    {
+                                        spacing:{
+                                            before: 200,
+                                            after: 200,
+                                        },
+                                        text: `Colaborador declara que possui todos os EPIs em ótimo estado para uso de acordo com sua função, _______`},
+                                ),
+                            ]
+                            }
+                        )
+                    ]
+                })
+            ]
+            const section = {
+                children: [
+                    new Table({
+                        columnWidths: [8500, 8500],
+                        width: {
+                            size: 9000,
+                            type: WidthType.DXA,
+                        },
+                        rows: tableRows,
+                    })
+                ],
+            }
+            doc.addSection(section);
+        }
+    }
+
+    
     let totalValueExecutor = 0;
+    serviceTableRows = []
 
     task[0].task_service_orders.forEach(async object => {
         totalValueExecutor += object.value_executor;
-        tableRows = [
+        serviceTableRows.push(
             new TableRow({
                 cantSplit: true,
                 tableHeader: true,
@@ -1514,47 +1528,103 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                     }),
                 ],
             }),
-        ]
-    
-        const section = {
-            properties: {
-                type: SectionType.CONTINUOUS,
-            },
-            children: [
-                new Table({
-                    columnWidths: [8500, 8500],
-                    width: {
-                        size: 9000,
-                        type: WidthType.DXA,
-                    },
-                    rows: tableRows,
-                })
-            ],
-        }
-        doc.addSection(section);
+        )
     })
 
-    const sectionTotalValue = {
-        properties: {
-            type: SectionType.CONTINUOUS,
-        },
+    const section = {
         children: [
+            new Paragraph({
+                pageBreakBefore: true,
+            }),
             new Table({
-                columnWidths: [8500, 8500],
                 width: {
                     size: 9000,
                     type: WidthType.DXA,
                 },
+                columnWidths: [8500, 8500],
                 rows: [
                     new TableRow({
                         cantSplit: true,
                         tableHeader: true,
                         children: [
                             new TableCell({
+                                columnSpan: 4,
+                                children: [
+                                    new Paragraph({
+                                    alignment: AlignmentType.CENTER,
+                                    text: `Serviços`,
+                                    heading: HeadingLevel.HEADING_3,
+                                    })
+                                ],
+                            }),
+                        ],
+                    }),
+                    new TableRow({
+                        cantSplit: true,
+                        tableHeader: true,
+                        children: [
+                            new TableCell({
+                                children: [
+                                    new Paragraph({
+                                    alignment: AlignmentType.CENTER,
+                                    text: `Descrição`,
+                                    heading: HeadingLevel.HEADING_3,
+                                    })
+                                ],
+                            }),
+                            new TableCell({
                                 width: {
-                                    size: 8000,
+                                    size: 1000,
                                     type: WidthType.DXA,
                                 },
+                                children: [
+                                    new Paragraph({
+                                    alignment: AlignmentType.CENTER,
+                                    text: `Unidade`,
+                                    heading: HeadingLevel.HEADING_3,
+                                    })
+                                ],
+                            }),
+                            new TableCell({
+                                width: {
+                                    size: 1000,
+                                    type: WidthType.DXA,
+                                },
+                                children: [
+                                    new Paragraph({
+                                    alignment: AlignmentType.CENTER,
+                                    text: `Quantidade`,
+                                    heading: HeadingLevel.HEADING_3,
+                                    })
+                                ],
+                            }),
+                            new TableCell({
+                                width: {
+                                    size: 1000,
+                                    type: WidthType.DXA,
+                                },
+                                children: [
+                                    new Paragraph({
+                                    alignment: AlignmentType.CENTER,
+                                    text: `Valor`,
+                                    heading: HeadingLevel.HEADING_3,
+                                    })
+                                ],
+                            }),
+                        ],
+                    }),
+                    ...serviceTableRows,
+                    new TableRow({
+                        cantSplit: true,
+                        tableHeader: true,
+                        children: [
+                            new TableCell({
+                                children: [],
+                            }),
+                            new TableCell({
+                                children: [],
+                            }),
+                            new TableCell({
                                 alignment: AlignmentType.RIGHT,
                                 children: [
                                     new Paragraph({
@@ -1573,11 +1643,11 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         ],
                     }),
                 ]
-            })
+            }),
         ],
     }
-    doc.addSection(sectionTotalValue);
-
+    doc.addSection(section);
+    
 
     Packer.toBuffer(doc).then((buffer) => {
         fs.writeFileSync("NewDocContract.docx", buffer);
