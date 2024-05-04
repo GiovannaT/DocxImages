@@ -2,6 +2,7 @@ const axios = require('axios')
 const docx = require("docx")
 const moment = require("moment")
 const fs = require('fs');
+const { createCustomParagraph, createClauseWithParagraphs } = require('./contractUtils');
 
 const caminhoParaJson = 'db.json'
 
@@ -26,21 +27,21 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
     const company = task[0].task_executors.filter((executor) => executor.company_id !== null);
     const leader = task[0].task_executors.filter((executor) => executor.leader === true);
 
-    const getCompany = async () => {
-        try {
-            const response = await axios.get(`https://3337-avanciconstru-apiserver-0ae2jz7xl1m.ws-us110.gitpod.io/company?id=${company[0].company_id}`, {
-                headers: {
-                'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQxNjc5MjAsImV4cCI6MTc2NjAwNzkyMCwic3ViIjoiZjM1ZDg2M2QtMmI4My00MGM4LWI4ZDUtM2ExNzU5YTU2NTc2In0.jD1gKQzKtfFAXx2rGEMEqfuYdVcvGa_EB74jmvGpQpc`
-            }});
-            return response.data[0];
+    // const getCompany = async () => {
+    //     try {
+    //         const response = await axios.get(`https://3337-avanciconstru-apiserver-0ae2jz7xl1m.ws-us110.gitpod.io/company?id=${company[0].company_id}`, {
+    //             headers: {
+    //             'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQxNjc5MjAsImV4cCI6MTc2NjAwNzkyMCwic3ViIjoiZjM1ZDg2M2QtMmI4My00MGM4LWI4ZDUtM2ExNzU5YTU2NTc2In0.jD1gKQzKtfFAXx2rGEMEqfuYdVcvGa_EB74jmvGpQpc`
+    //         }});
+    //         return response.data[0];
 
-        } catch (error) {
-            console.error('erro')
-            console.error(error.response)
-            return null;
-        }
-    }
-    const companyData = await getCompany();
+    //     } catch (error) {
+    //         console.error('erro')
+    //         console.error(error.response)
+    //         return null;
+    //     }
+    // }
+    // const companyData = await getCompany();
 
     const { Document, Packer, Paragraph, Table, TextRun, TableRow, TableCell, ShadingType, SectionType, HeadingLevel, AlignmentType, LevelFormat, WidthType} = docx;
     const doc = new Document({
@@ -112,19 +113,6 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
             ],
         },
         sections: [{
-            // footers: {
-            //     default: new Footer({
-            //         children: [new Paragraph({
-            //             alignment: AlignmentType.END,
-            //             children: [
-            //                 new TextRun("Página "),
-            //                 new TextRun({
-            //                     children: [PageNumber.CURRENT]
-            //                 })
-            //             ]
-            //         })]
-            //     })
-            // },
             children: [
                 new Paragraph({
                     children: [
@@ -234,16 +222,8 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         })
                     ],
                 }),
-                new Paragraph({
-                    children: [
-                        new TextRun({
-                            text:"CLÁUSULA 3ª – DO PRAZO –",
-                            bold:true}),
-                    ],
-                    spacing: {
-                        before: 200,
-                    },
-                }),
+                ////////////////////////////////////////////
+                createClauseWithParagraphs(3, 'DO PRAZO'),
                 new Paragraph({
                     children: [
                         new TextRun({
@@ -291,16 +271,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         `),
                     ],
                 }),
-                new Paragraph({
-                    children: [
-                        new TextRun({
-                            text:"CLÁUSULA 4ª - DA RETRIBUIÇÃO –",
-                            bold: true}),
-                    ],
-                    spacing: {
-                        before: 200,
-                    },
-                }),
+                createClauseWithParagraphs(4, 'DA RETRIBUIÇÃO'),
                 new Paragraph({
                     children: [
                         new TextRun(`Pela prestação dos serviços o `),
@@ -327,18 +298,18 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                             text: 'Chave Pix: ',
                         }),
                         new TextRun({
-                            text: `${companyData.bank_account.pix_type} `,
+                            // text: `${companyData.bank_account.pix_type} `,
                             bold: true,
                         }),
                         new TextRun({
-                            text: `${companyData.bank_account.pix}, `,
+                            // text: `${companyData.bank_account.pix}, `,
                             bold: true,
                         }),
                         new TextRun({
                             text: 'Responsável: ',
                         }),
                         new TextRun({
-                            text: `${companyData.bank_account.account_owner} `,
+                            // text: `${companyData.bank_account.account_owner} `,
                             bold: true,
                         }),
                     ],
@@ -346,16 +317,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         before: 200,
                     },
                 }),
-                new Paragraph({
-                    children: [
-                        new TextRun({
-                            text: "CLÁUSULA 5ª - DAS OBRIGAÇÕES DA CONTRATADA –",
-                            bold: true,}),
-                    ],
-                    spacing: {
-                        before: 200,
-                    },
-                }),
+                createClauseWithParagraphs(5, 'DAS OBRIGAÇÕES DA CONTRATADA'),
                 new Paragraph({
                     children: [
                         new TextRun(`Sem prejuízo de outras disposições deste contrato, constituem obrigações da `),
@@ -447,16 +409,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         before: 200,
                     },
                 }),
-                new Paragraph({
-                    children: [
-                        new TextRun({
-                            text: `CLÁUSULA 6ª - DAS OBRIGAÇÕES DO CONTRATANTE –`,
-                            bold: true}),
-                    ],
-                    spacing: {
-                        before: 200,
-                    },
-                }),
+                createClauseWithParagraphs(6, 'DAS OBRIGAÇÕES DO CONTRATANTE'),
                 new Paragraph({
                     children: [
                         new TextRun(`Sem prejuízo de outras disposições deste contrato, constituem obrigações do `),
@@ -490,16 +443,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         before: 200,
                     },
                 }),
-                new Paragraph({
-                    children: [
-                        new TextRun({
-                            text:`CLÁUSULA 7ª - DA RESCISÃO –`,
-                        bold: true,}),
-                    ],
-                    spacing: {
-                        before: 200,
-                    },
-                }),
+                createClauseWithParagraphs(7, 'DA RESCISÃO'),
                 new Paragraph({
                     children: [
                         new TextRun(`O presente instrumento poderá ser rescindido caso qualquer uma das partes descumpra o disposto neste contrato.
@@ -533,15 +477,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         before: 200,
                     },
                 }),
-                new Paragraph({
-                    children: [
-                        new TextRun({text: `CLÁUSULA 8ª - DA MULTA –
-                        `, bold:true,}),
-                    ],
-                    spacing: {
-                        before: 200,
-                    },
-                }),
+                createClauseWithParagraphs(8, 'DA MULTA'),
                 new Paragraph({
                     children: [
                         new TextRun(`§ 1º. A CONTRATADA, no caso de atraso na entrega dos serviços superior a 5 dias, está sujeita a MULTA de 10% com base no valor do contrato.
@@ -557,15 +493,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         before: 200,
                     },
                 }),
-                new Paragraph({
-                    children: [
-                        new TextRun({text:`CLÁUSULA 9ª – DA EXTINÇÃO DO CONTRATO e TIPO DO CONTRATO –
-                        `, bold: true,}),
-                    ],
-                    spacing: {
-                        before: 200,
-                    },
-                }),
+                createClauseWithParagraphs(9, 'DA EXTINÇÃO DO CONTRATO e TIPO DO CONTRATO'),
                 new Paragraph({
                     children: [
                         new TextRun(`O presente contrato extingue-se sem que assista às partes direito a qualquer tipo de indenização, ressarcimento ou multa, por mais especial que seja, nas seguintes hipóteses:
@@ -610,15 +538,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         before: 200,
                     },
                 }),
-                new Paragraph({
-                    children: [
-                        new TextRun({text:`CLÁUSULA 10ª - DAS CONDIÇÕES GERAIS –
-                        `, bold:true}),
-                    ],
-                    spacing: {
-                        before: 200,
-                    },
-                }),
+                createClauseWithParagraphs(10,'DAS CONDIÇÕES GERAIS'),
                 new Paragraph({
                     children: [
                         new TextRun(`Salvo expressa autorização do CONTRATANTE, não poderá a CONTRATADA transferir ou subcontratar os serviços previstos neste instrumento, sob o risco de ocorrer a rescisão imediata.
@@ -643,15 +563,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         before: 200,
                     },
                 }),
-                new Paragraph({
-                    children: [
-                        new TextRun({text:`CLÁUSULA 11ª - DO FORO –
-                        `, bold: true}),
-                    ],
-                    spacing: {
-                        before: 200,
-                    },
-                }),
+                createClauseWithParagraphs(11, 'DO FORO'),
                 new Paragraph({
                     children: [
                         new TextRun(`Fica desde já eleito o foro da comarca de Cuiabá-MT para serem resolvidas eventuais pendências decorrentes deste contrato.
@@ -832,77 +744,77 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
 
     for (const executor of task[0].task_executors) {
         if(executor.executor){
-            const getSkillProducts = async () => {
-                try {
-                    const response = await axios.get(`https://3337-avanciconstru-apiserver-0ae2jz7xl1m.ws-us110.gitpod.io/skillproducts?skill_id=${executor.executor.skill_id}`, {
-                        headers: {
-                            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQxNjc5MjAsImV4cCI6MTc2NjAwNzkyMCwic3ViIjoiZjM1ZDg2M2QtMmI4My00MGM4LWI4ZDUtM2ExNzU5YTU2NTc2In0.jD1gKQzKtfFAXx2rGEMEqfuYdVcvGa_EB74jmvGpQpc`
-                        }
-                    });
-                    return response.data;
-                } catch (error) {
-                    console.error('erro')
-                    console.error(error.response)
-                    return null;
-                }
-            }
-            const skillProducts = await getSkillProducts();
+            // const getSkillProducts = async () => {
+            //     try {
+            //         const response = await axios.get(`https://3337-avanciconstru-apiserver-0ae2jz7xl1m.ws-us110.gitpod.io/skillproducts?skill_id=${executor.executor.skill_id}`, {
+            //             headers: {
+            //                 'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQxNjc5MjAsImV4cCI6MTc2NjAwNzkyMCwic3ViIjoiZjM1ZDg2M2QtMmI4My00MGM4LWI4ZDUtM2ExNzU5YTU2NTc2In0.jD1gKQzKtfFAXx2rGEMEqfuYdVcvGa_EB74jmvGpQpc`
+            //             }
+            //         });
+            //         return response.data;
+            //     } catch (error) {
+            //         console.error('erro')
+            //         console.error(error.response)
+            //         return null;
+            //     }
+            // }
+            // const skillProducts = await getSkillProducts();
 
             var productRows = []
-            skillProducts.forEach(product => {
-                productRows.push(
-                    new TableRow({
-                        children: [
-                            new TableCell({
-                                height: {value: 50, type: WidthType},
-                                children: [
-                                    new Paragraph({
-                                        alignment: AlignmentType.CENTER,
-                                        text: `1`,
-                                        bold: true,
-                                        }),
-                                ],
-                            }),
-                            new TableCell({
-                                height: {value: 50, type: WidthType},
-                                children: [
-                                    new Paragraph({
-                                        alignment: AlignmentType.CENTER,
-                                        text: `${product.product.description}.`,
-                                        bold: true,
-                                        }),
-                                ],
-                            }),
-                            new TableCell({
-                                height: {value: 50, type: WidthType},
-                                children: [],
-                            }),
-                            new TableCell({
-                                height: {value: 50, type: WidthType},
-                                children: [
-                                    new Paragraph({
-                                        alignment: AlignmentType.CENTER,
-                                        text: `${moment().format('DD/MM/YYYY')}.`,
-                                        bold: true,
-                                    }),
-                                ],
-                            }),
-                            new TableCell({
-                                height: {value: 50, type: WidthType},
-                                children: [],
-                            }),
-                            new TableCell({
-                                height: {value: 50, type: WidthType},
-                                children: [],
-                            }),
-                            new TableCell({
-                                height: {value: 50, type: WidthType},
-                                children: [],
-                            }),
-                        ]
-                    }),
-                )
-            })
+            // skillProducts.forEach(product => {
+            //     productRows.push(
+            //         new TableRow({
+            //             children: [
+            //                 new TableCell({
+            //                     height: {value: 50, type: WidthType},
+            //                     children: [
+            //                         new Paragraph({
+            //                             alignment: AlignmentType.CENTER,
+            //                             text: `1`,
+            //                             bold: true,
+            //                             }),
+            //                     ],
+            //                 }),
+            //                 new TableCell({
+            //                     height: {value: 50, type: WidthType},
+            //                     children: [
+            //                         new Paragraph({
+            //                             alignment: AlignmentType.CENTER,
+            //                             text: `${product.product.description}.`,
+            //                             bold: true,
+            //                             }),
+            //                     ],
+            //                 }),
+            //                 new TableCell({
+            //                     height: {value: 50, type: WidthType},
+            //                     children: [],
+            //                 }),
+            //                 new TableCell({
+            //                     height: {value: 50, type: WidthType},
+            //                     children: [
+            //                         new Paragraph({
+            //                             alignment: AlignmentType.CENTER,
+            //                             text: `${moment().format('DD/MM/YYYY')}.`,
+            //                             bold: true,
+            //                         }),
+            //                     ],
+            //                 }),
+            //                 new TableCell({
+            //                     height: {value: 50, type: WidthType},
+            //                     children: [],
+            //                 }),
+            //                 new TableCell({
+            //                     height: {value: 50, type: WidthType},
+            //                     children: [],
+            //                 }),
+            //                 new TableCell({
+            //                     height: {value: 50, type: WidthType},
+            //                     children: [],
+            //                 }),
+            //             ]
+            //         }),
+            //     )
+            // })
 
             tableRows = [
                 new TableRow({
@@ -1531,122 +1443,126 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
         )
     })
 
-    const section = {
-        children: [
-            new Paragraph({
-                pageBreakBefore: true,
-            }),
-            new Table({
-                width: {
-                    size: 9000,
-                    type: WidthType.DXA,
-                },
-                columnWidths: [8500, 8500],
-                rows: [
-                    new TableRow({
-                        cantSplit: true,
-                        tableHeader: true,
-                        children: [
-                            new TableCell({
-                                columnSpan: 4,
-                                children: [
-                                    new Paragraph({
-                                    alignment: AlignmentType.CENTER,
-                                    text: `Serviços`,
-                                    heading: HeadingLevel.HEADING_3,
-                                    })
-                                ],
-                            }),
-                        ],
-                    }),
-                    new TableRow({
-                        cantSplit: true,
-                        tableHeader: true,
-                        children: [
-                            new TableCell({
-                                children: [
-                                    new Paragraph({
-                                    alignment: AlignmentType.CENTER,
-                                    text: `Descrição`,
-                                    heading: HeadingLevel.HEADING_3,
-                                    })
-                                ],
-                            }),
-                            new TableCell({
-                                width: {
-                                    size: 1000,
-                                    type: WidthType.DXA,
-                                },
-                                children: [
-                                    new Paragraph({
-                                    alignment: AlignmentType.CENTER,
-                                    text: `Unidade`,
-                                    heading: HeadingLevel.HEADING_3,
-                                    })
-                                ],
-                            }),
-                            new TableCell({
-                                width: {
-                                    size: 1000,
-                                    type: WidthType.DXA,
-                                },
-                                children: [
-                                    new Paragraph({
-                                    alignment: AlignmentType.CENTER,
-                                    text: `Quantidade`,
-                                    heading: HeadingLevel.HEADING_3,
-                                    })
-                                ],
-                            }),
-                            new TableCell({
-                                width: {
-                                    size: 1000,
-                                    type: WidthType.DXA,
-                                },
-                                children: [
-                                    new Paragraph({
-                                    alignment: AlignmentType.CENTER,
-                                    text: `Valor`,
-                                    heading: HeadingLevel.HEADING_3,
-                                    })
-                                ],
-                            }),
-                        ],
-                    }),
-                    ...serviceTableRows,
-                    new TableRow({
-                        cantSplit: true,
-                        tableHeader: true,
-                        children: [
-                            new TableCell({
-                                children: [],
-                            }),
-                            new TableCell({
-                                children: [],
-                            }),
-                            new TableCell({
-                                alignment: AlignmentType.RIGHT,
-                                children: [
-                                    new Paragraph({
-                                    text: `Valor total: `,
-                                    })
-                                ],
-                            }),
-                            new TableCell({
-                                height: {value: 50, type: WidthType},
-                                width: {
-                                    size: 2000,
-                                    type: WidthType.DXA,
-                                },
-                                children: [new Paragraph(`R$ ${totalValueExecutor}`)],
-                            }),
-                        ],
-                    }),
-                ]
-            }),
-        ],
+    const newSection = () => {
+        const section = {
+            children: [
+                new Paragraph({
+                    pageBreakBefore: true,
+                }),
+                new Table({
+                    width: {
+                        size: 9000,
+                        type: WidthType.DXA,
+                    },
+                    columnWidths: [8500, 8500],
+                    rows: [
+                        new TableRow({
+                            cantSplit: true,
+                            tableHeader: true,
+                            children: [
+                                new TableCell({
+                                    columnSpan: 4,
+                                    children: [
+                                        new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        text: `Serviços`,
+                                        heading: HeadingLevel.HEADING_3,
+                                        })
+                                    ],
+                                }),
+                            ],
+                        }),
+                        new TableRow({
+                            cantSplit: true,
+                            tableHeader: true,
+                            children: [
+                                new TableCell({
+                                    children: [
+                                        new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        text: `Descrição`,
+                                        heading: HeadingLevel.HEADING_3,
+                                        })
+                                    ],
+                                }),
+                                new TableCell({
+                                    width: {
+                                        size: 1000,
+                                        type: WidthType.DXA,
+                                    },
+                                    children: [
+                                        new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        text: `Unidade`,
+                                        heading: HeadingLevel.HEADING_3,
+                                        })
+                                    ],
+                                }),
+                                new TableCell({
+                                    width: {
+                                        size: 1000,
+                                        type: WidthType.DXA,
+                                    },
+                                    children: [
+                                        new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        text: `Quantidade`,
+                                        heading: HeadingLevel.HEADING_3,
+                                        })
+                                    ],
+                                }),
+                                new TableCell({
+                                    width: {
+                                        size: 1000,
+                                        type: WidthType.DXA,
+                                    },
+                                    children: [
+                                        new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        text: `Valor`,
+                                        heading: HeadingLevel.HEADING_3,
+                                        })
+                                    ],
+                                }),
+                            ],
+                        }),
+                        ...serviceTableRows,
+                        new TableRow({
+                            cantSplit: true,
+                            tableHeader: true,
+                            children: [
+                                new TableCell({
+                                    children: [],
+                                }),
+                                new TableCell({
+                                    children: [],
+                                }),
+                                new TableCell({
+                                    alignment: AlignmentType.RIGHT,
+                                    children: [
+                                        new Paragraph({
+                                        text: `Valor total: `,
+                                        })
+                                    ],
+                                }),
+                                new TableCell({
+                                    height: {value: 50, type: WidthType},
+                                    width: {
+                                        size: 2000,
+                                        type: WidthType.DXA,
+                                    },
+                                    children: [new Paragraph(`R$ ${totalValueExecutor}`)],
+                                }),
+                            ],
+                        }),
+                    ]
+                }),
+            ],
+        }
+        doc.addSection(section);
     }
-    doc.addSection(section);
+    newSection();
+    
     
 
     Packer.toBuffer(doc).then((buffer) => {
