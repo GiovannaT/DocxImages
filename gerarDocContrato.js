@@ -2,7 +2,7 @@ const axios = require('axios')
 const docx = require("docx")
 const moment = require("moment")
 const fs = require('fs');
-const { createEpiTable, createClauseWithParagraphs } = require('./contractUtils');
+const { createEpiTable, createClauseWithParagraphs, countDays } = require('./contractUtils');
 
 const caminhoParaJson = 'db.json'
 
@@ -15,14 +15,6 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
     let task = JSON.parse(data);
     var tableRows = [];
 
-    const countDays = () => {
-        var startDate = new Date(task[0].initial_date);
-        var endDate = new Date(task[0].final_date);
-
-        var timeDifference = endDate.getTime() - startDate.getTime();
-        return daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
-    }
-
     const company = task[0].task_executors.filter((executor) => executor.company_id !== null);
     const leader = task[0].task_executors.filter((executor) => executor.leader === true);
 
@@ -32,12 +24,10 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                 headers: {
                 'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTUyNjA5OTMsImV4cCI6MTc2NzEwMDk5Mywic3ViIjoiZjM1ZDg2M2QtMmI4My00MGM4LWI4ZDUtM2ExNzU5YTU2NTc2In0.EepQV0WVRYNQLQp2sPDhJU_Cm34c2rDFPuq0I_fqpDI`
             }});
-            // console.log(response.data);
             return response.data[0];
 
         } catch (error) {
             console.error('erro getcompany')
-            // console.error(error.response)
             return null;
         }
     }
@@ -48,69 +38,6 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
         creator: "Usuário criador",
         description: `Contrato`,
         title: 'Contrato',
-        numbering: {
-            config: [
-                {
-                    reference: "my-numbering",
-                    levels: [
-                        {
-                            level: 0,
-                            format: LevelFormat.DECIMAL,
-                            text: "%1.",
-                            alignment: AlignmentType.START,
-                        },
-                        {
-                            level: 1,
-                            format: LevelFormat.DECIMAL,
-                            text: "%2.",
-                            alignment: AlignmentType.START,
-                        },
-                        {
-                            level: 2,
-                            format: LevelFormat.DECIMAL,
-                            text: "%3.",
-                            alignment: AlignmentType.START,
-                        },
-                        {
-                            level: 3,
-                            format: LevelFormat.DECIMAL,
-                            text: "%4.",
-                            alignment: AlignmentType.START,
-                        },
-                        {
-                            level: 4,
-                            format: LevelFormat.DECIMAL,
-                            text: "%5.",
-                            alignment: AlignmentType.START,
-                        },
-                        {
-                            level: 5,
-                            format: LevelFormat.LOWER_LETTER,
-                            text: "a)",
-                            alignment: AlignmentType.START,
-                        },
-                        {
-                            level: 6,
-                            format: LevelFormat.LOWER_LETTER,
-                            text: "b)",
-                            alignment: AlignmentType.START,
-                        },
-                        {
-                            level: 7,
-                            format: LevelFormat.LOWER_LETTER,
-                            text: "c)",
-                            alignment: AlignmentType.START,
-                        },
-                        {
-                            level: 8,
-                            format: LevelFormat.LOWER_LETTER,
-                            text: "%d)",
-                            alignment: AlignmentType.START,
-                        },
-                    ],
-                },
-            ],
-        },
         sections: [{
             children: [
                 new Paragraph({
@@ -226,7 +153,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         new TextRun({
                             text: "Os serviços ora contratados serão prestados pelo prazo de"
                         }),
-                        new TextRun({text:` ${countDays()} dias `, bold: true}),
+                        new TextRun({text:` ${countDays(task[0].initial_date, task[0].final_date)} dias `, bold: true}),
                         new TextRun({
                             text: "com início em "
                         }),
@@ -294,23 +221,23 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         new TextRun({
                             text: 'Chave Pix: ',
                         }),
-                        // new TextRun({
-                        //     text: `${companyData.bank_account.pix_type} `,
-                        //     bold: true,
-                        // }),
-                        // new TextRun({
-                        //     text: `${companyData.bank_account.pix}, `,
-                        //     bold: true,
-                        // }),
+                        new TextRun({
+                            text: `${companyData.bank_account.pix_type} `,
+                            bold: true,
+                        }),
+                        new TextRun({
+                            text: `${companyData.bank_account.pix}, `,
+                            bold: true,
+                        }),
 
                         
-                        // new TextRun({
-                        //     text: 'Responsável: ',
-                        // }),
-                        // new TextRun({
-                        //     text: `${companyData.bank_account.account_owner} `,
-                        //     bold: true,
-                        // }),
+                        new TextRun({
+                            text: 'Responsável: ',
+                        }),
+                        new TextRun({
+                            text: `${companyData.bank_account.account_owner} `,
+                            bold: true,
+                        }),
                     ],
                     spacing: {
                         before: 200,
@@ -731,17 +658,13 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                         new TextRun({text:`CPF: DA TESTEMUNHA`, bold:true}),
                     ],
                     alignment: AlignmentType.CENTER,
-
-                }),
-                new Paragraph({
-
                 }),
             ]
         }],
     })
 
     for (const executor of task[0].task_executors) {
-        createEpiTable(doc, executor);
+        await createEpiTable(doc, executor);
     }
 
     
