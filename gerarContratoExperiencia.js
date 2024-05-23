@@ -1,7 +1,7 @@
 const docx = require("docx")
 const fs = require('fs');
 
-const { createXPContract, createClauseHeader, createSignSection, createRenew, createAttributionsSection, createNewSection, createCompanyTextRun, createEmployeeTextRun } = require('./contractUtils');
+const { createXPContract, createClauseHeader, createSignSection, createRenew, createAttributionsSection, createNewSection, createCompanyTextRun, createEmployeeTextRun, createPageFooter, createPageHeader } = require('./contractUtils');
 
 const caminhoParaJson = 'dbUser.json'
 
@@ -37,53 +37,14 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
             headers: {
                 default: new Header({ 
                     children: [
-                        new Paragraph({
-                            alignment: AlignmentType.CENTER,    
-                            children: [
-                                new ImageRun({
-                                    type: 'gif',
-                                    data: fs.readFileSync("./public/hbt.png"),
-                                    transformation: {
-                                        width: 100,
-                                        height: 100,
-                                    },
-                                })
-                            ]
-                        })
+                        createPageHeader('AVANCI')
                     ],
                 }),
             },
             footers: {
                 default: new Footer({
                     children: [
-                        new Paragraph({
-                            alignment: AlignmentType.CENTER,    
-                            children: [
-                                new TextRun({
-                                    text: "HABIT CONSTRUÇÕES E SERVIÇOS EIRELLI",
-                                    bold: true,
-                                    size: 10,
-                                })
-                            ],
-                        }),
-                        new Paragraph({
-                            alignment: AlignmentType.CENTER,    
-                            children: [
-                                new TextRun({
-                                    text: "CNPJ: 28.697.931/0001-43 - Rua Projetada F, nº 76 - Ribeirão do Lipa - Cuiabá - Mato Grosso",
-                                    size: 10,
-                                })
-                            ],
-                        }),
-                        new Paragraph({
-                            alignment: AlignmentType.CENTER,    
-                            children: [
-                                new TextRun({
-                                    text: "CEP: 78048-163 - Telefone para contato: 65981088373 - recepcaohbt@gmail.com",
-                                    size: 10,
-                                })
-                            ],
-                        }),
+                       ...createPageFooter('AVANCI')
                     ],
                 }),
             },
@@ -142,9 +103,9 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                             text: '1.1 ',
                             size: 24,
                             bold: true,
-                            font: "Arial",
+                            font: "Calibri Light",
                         }),
-                        ...createCompanyTextRun(),
+                        ...createCompanyTextRun('AVANCI'),
                     ],
                 }),
                 new Paragraph({
@@ -168,7 +129,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                             text: `1.2 `,
                             bold: true,
                             size: 24,
-                            font: "Arial",
+                            font: "Calibri Light",
                         }),
                         ...createEmployeeTextRun(user),
                     ],
@@ -189,34 +150,34 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                             text: '2.1 ',
                             size: 24,
                             bold: true,
-                            font: "Arial",
+                            font: "Calibri Light",
                         }),
                         new TextRun({
                             size: 24,
                             text: 'Fica o(a) ',
-                            font: "Arial",
+                            font: "Calibri Light",
                         }),
                         new TextRun({
                             text: 'EMPREGADO(A) ',
                             size: 24,
                             bold: true,
-                            font: "Arial",
+                            font: "Calibri Light",
                         }),
                         new TextRun({
                             text: 'admitido no quadro de funcionários do(a) ',
                             size: 24,
-                            font: "Arial",
+                            font: "Calibri Light",
                         }),
                         new TextRun({
                             text: 'EMPREGADOR(A) ',
                             size: 24,
                             bold: true,
-                            font: "Arial",
+                            font: "Calibri Light",
                         }),
                         new TextRun({
                             text: `para exercer o cargo de ${user.skill.name}, CBO ${user.skill.cbo}.`,
                             size: 24,
-                            font: "Arial",
+                            font: "Calibri Light",
                         }),
                     ],
                 }),
@@ -235,12 +196,12 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                             text: '2.2 SUMÁRIO DO CARGO ',
                             bold: true,
                             size: 24,
-                            font: "Arial",
+                            font: "Calibri Light",
                         }),
                         new TextRun({
                             text: `${user.skill.summary}`,
                             size: 24,
-                            font: "Arial",
+                            font: "Calibri Light",
                         }),
                        
                     ],
@@ -260,7 +221,7 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
                             text: '2.3 ATRIBUIÇÕES ',
                             size: 24,
                             bold: true,
-                            font: "Arial",
+                            font: "Calibri Light",
                         }),                       
                     ],
                 }),
@@ -270,9 +231,9 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
     
     createAttributionsSection(user.skill.assignments, doc),
     await createNewSection(user, doc);
-    createSignSection(user, doc);
+    createSignSection(user, doc, 'AVANCI');
     createRenew(user, doc),
-    createSignSection(user, doc);
+    createSignSection(user, doc, 'AVANCI');
     
     Packer.toBuffer(doc).then((buffer) => {
         fs.writeFileSync("ContratoExperiência.docx", buffer);
