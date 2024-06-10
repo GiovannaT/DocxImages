@@ -15,18 +15,6 @@ function App() {
                           new TextRun({text: 'Novo Relatorio', size: 12}),
                       ],
                   }),
-                //   new Paragraph({
-                //     children: [
-                //         new TextRun({
-                //             text: "Foo Bar",
-                //             bold: true,
-                //         }),
-                //         new TextRun({
-                //             text: "\nNovo teste",
-                //             bold: true,
-                //         }),
-                //     ],
-                // }),
               ],
           },
       ],

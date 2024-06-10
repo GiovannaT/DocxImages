@@ -1,0 +1,571 @@
+[
+	{
+		"id": "0d03eb82-2ce7-4055-a860-57168191a4c9",
+		"code": 1732,
+		"description": "teste 4",
+		"place_id": "e4261788-9d09-469e-bf35-3421e6421bcd",
+		"created_by_id": "83405c94-55cf-4b90-8307-ff0b778bc0e1",
+		"finish": false,
+		"outsourced": true,
+		"send_to_finish": null,
+		"revision": false,
+		"engineer_approval": false,
+		"status": "AGUARDANDO LIBERAÇÃO P/ EXECUÇÃO",
+		"administrative_approval": false,
+		"note": null,
+		"buyer_id": "071a94c1-6f68-4eab-907e-daf2315fba38",
+		"initial_date": "2024-04-24",
+		"final_date": "2024-05-02",
+		"created_at": "2024-04-27T10:31:56.000Z",
+		"updated_at": "2024-04-29T20:04:01.860Z",
+		"purchase": null,
+		"buyer_task": {
+			"id": "071a94c1-6f68-4eab-907e-daf2315fba38",
+			"name": "IGOR VINICIUS AVANCI ROSA ",
+			"cpf": "02703054165",
+			"pis": "21046505973",
+			"cnpj": "37683219000142",
+			"disc": null,
+			"contract_type": null,
+			"rg": "621956338",
+			"voter_title": null,
+			"email": null,
+			"push": {
+				"endpoint": "https://fcm.googleapis.com/fcm/send/dmvJbCpmIwQ:APA91bHhqEGg9JoEeCfi_Ml8uvypVKt1usZj3pD2D_tAO5KvA3uqHzdGVTau9Bq8KlmpXHV-044riMZywffdJNuE4lAjgGjE95WxNaQLUZPkwp9fzMyAEcCJghunfKnedvpreHeVHJXH",
+				"expirationTime": null,
+				"keys": {
+					"p256dh": "BJmTQHO3IOmGa1YWCiDjB5KqLpUPI-2zZ1rT1wWytYQ5kU29L02H6gaYV5SBLueBO7A9EFXpss2jMi89sdwSjpM",
+					"auth": "WJOz-SE_ZekDhUSbEGNv1g"
+				}
+			},
+			"meta": null,
+			"skills": [
+				"Engenheiro(a)"
+			],
+			"skill_id": "ad593ef0-6965-4d01-aabf-fd2b45cd1be4",
+			"birthday": "1992-12-24",
+			"gender": "Masculino",
+			"phone": "65981347018",
+			"shirt_size": null,
+			"pants_size": null,
+			"boot_size": null,
+			"permission": [
+				"Engenharia - Administrador"
+			],
+			"active": true,
+			"password": "$2a$08$/0YndA6J9aB8vDaOdUU/TO.smXtOJdEBEb6CmML6bMDRXp0YC4Itu",
+			"created_at": "2020-11-30T10:09:34.000Z",
+			"updated_at": "2024-04-29T16:34:21.000Z"
+		},
+		"task_executors": [
+			{
+				"id": "69f0ee19-8e48-41e2-9c24-4f3f3593f6c4",
+				"fouls": 0,
+				"group_fouls": 0,
+				"task_id": "0d03eb82-2ce7-4055-a860-57168191a4c9",
+				"executor_id": null,
+				"company_id": "ac8d2f96-e21d-430f-80dc-2398a92a46e9",
+				"skill": null,
+				"financial_record_id": null,
+				"value": 30.54,
+				"leader": false,
+				"filed": false,
+				"created_at": "2024-04-27T10:57:25.000Z",
+				"updated_at": "2024-04-29T18:30:20.383Z",
+				"executor": null,
+				"company": {
+					"id": "ac8d2f96-e21d-430f-80dc-2398a92a46e9",
+					"name": "FARTEC FABRICA DE ARTEFATOS DE CIMENTO LTDA",
+					"razao_social": "FARTEC FABRICA DE ARTEFATOS DE CIMENTO LTDA",
+					"email": "marcia@dapare.com.br",
+					"phone": "6599580991",
+					"phones": [
+						"6599580991"
+					],
+					"whatsapp": "6599580991",
+					"type": null,
+					"distribution_model": null,
+					"segments": null,
+					"cnpj": "1527660100010",
+					"cnpjs": [
+						"1527660100010"
+					],
+					"cpf": null,
+					"active": true,
+					"created_at": "2022-06-30T08:57:10.000Z",
+					"updated_at": "2023-12-18T15:08:31.000Z"
+				}
+			},
+			{
+				"id": "0c99af64-185e-4928-a299-681afc432f9b",
+				"fouls": 0,
+				"group_fouls": 0,
+				"task_id": "0d03eb82-2ce7-4055-a860-57168191a4c9",
+				"executor_id": "73c72d42-472d-4814-8b29-c50c42b27a45",
+				"company_id": null,
+				"skill": null,
+				"financial_record_id": null,
+				"value": 0,
+				"leader": true,
+				"filed": false,
+				"created_at": "2024-04-29T14:28:19.000Z",
+				"updated_at": "2024-04-29T14:28:19.000Z",
+				"executor": {
+					"id": "73c72d42-472d-4814-8b29-c50c42b27a45",
+					"name": "RAIMUNDO ALVES FEITOSA",
+					"cpf": "42436192120",
+					"pis": null,
+					"cnpj": null,
+					"disc": null,
+					"contract_type": null,
+					"rg": "00909467",
+					"voter_title": null,
+					"email": null,
+					"push": null,
+					"meta": null,
+					"skills": [
+						"Pedreiro(a)"
+					],
+					"skill_id": "e065fb3f-0be0-4612-89db-63a8f30011b5",
+					"birthday": "1958-04-10",
+					"gender": "Não Informar",
+					"phone": null,
+					"shirt_size": null,
+					"pants_size": null,
+					"boot_size": null,
+					"permission": null,
+					"active": true,
+					"password": null,
+					"created_at": "2020-11-23T05:31:27.174Z",
+					"updated_at": "2022-03-23T13:49:21.000Z",
+					"skill": {
+						"id": "e065fb3f-0be0-4612-89db-63a8f30011b5",
+						"name": "PEDREIRO(A)",
+						"active": true,
+						"created_at": "2023-10-30T14:37:08.406Z",
+						"updated_at": "2024-03-01T09:39:16.000Z"
+					}
+				},
+				"company": null
+			},
+			{
+				"id": "ed7c0ce9-6068-483b-8dab-ab9f0372799c",
+				"fouls": 0,
+				"group_fouls": 0,
+				"task_id": "0d03eb82-2ce7-4055-a860-57168191a4c9",
+				"executor_id": "967f603d-41de-4201-8a64-77a64e39049a",
+				"company_id": null,
+				"skill": null,
+				"financial_record_id": null,
+				"value": 0,
+				"leader": false,
+				"filed": false,
+				"created_at": "2024-04-27T11:30:19.000Z",
+				"updated_at": "2024-04-27T11:30:19.000Z",
+				"executor": {
+					"id": "967f603d-41de-4201-8a64-77a64e39049a",
+					"name": "IVAN VALERIANO DE MORAES",
+					"cpf": "05328108132",
+					"pis": null,
+					"cnpj": null,
+					"disc": null,
+					"contract_type": null,
+					"rg": "25570145",
+					"voter_title": null,
+					"email": null,
+					"push": null,
+					"meta": {},
+					"skills": [
+						"Prestador(a) de Serviço"
+					],
+					"skill_id": "86b14e44-7366-45fe-a16f-05495923dbf3",
+					"birthday": "1996-04-15",
+					"gender": "Masculino",
+					"phone": "6598115889",
+					"shirt_size": null,
+					"pants_size": null,
+					"boot_size": null,
+					"permission": null,
+					"active": true,
+					"password": null,
+					"created_at": "2023-01-06T18:56:15.000Z",
+					"updated_at": "2023-01-06T18:56:15.000Z",
+					"skill": {
+						"id": "86b14e44-7366-45fe-a16f-05495923dbf3",
+						"name": "PRESTADOR(A) DE SERVIÇOS",
+						"active": true,
+						"created_at": "2023-10-30T14:37:08.406Z",
+						"updated_at": "2024-03-01T10:42:21.000Z"
+					}
+				},
+				"company": null
+			},
+			{
+				"id": "94d8e385-e6f8-4934-920c-177a2180d95d",
+				"fouls": 0,
+				"group_fouls": 0,
+				"task_id": "0d03eb82-2ce7-4055-a860-57168191a4c9",
+				"executor_id": "6d64e157-7340-49e2-9270-e70e3fa09111",
+				"company_id": null,
+				"skill": null,
+				"financial_record_id": null,
+				"value": 0,
+				"leader": false,
+				"filed": false,
+				"created_at": "2024-04-29T14:30:20.000Z",
+				"updated_at": "2024-04-29T14:30:20.000Z",
+				"executor": {
+					"id": "6d64e157-7340-49e2-9270-e70e3fa09111",
+					"name": "FABIANO GONCALVES DA SILVA",
+					"cpf": "84117451120",
+					"pis": "13955871311",
+					"cnpj": null,
+					"disc": null,
+					"contract_type": "Habit - Registro",
+					"rg": "07927789",
+					"voter_title": null,
+					"email": null,
+					"push": null,
+					"meta": {
+						"motherName": "",
+						"fatherName": "",
+						"ctps": "",
+						"spouseName": ""
+					},
+					"skills": [
+						"Pedreiro(a)"
+					],
+					"skill_id": "e065fb3f-0be0-4612-89db-63a8f30011b5",
+					"birthday": "1975-04-17",
+					"gender": "Masculino",
+					"phone": "65992006842",
+					"shirt_size": null,
+					"pants_size": null,
+					"boot_size": null,
+					"permission": null,
+					"active": true,
+					"password": null,
+					"created_at": "2023-01-10T08:08:29.000Z",
+					"updated_at": "2024-03-26T14:48:29.000Z",
+					"skill": {
+						"id": "e065fb3f-0be0-4612-89db-63a8f30011b5",
+						"name": "PEDREIRO(A)",
+						"active": true,
+						"created_at": "2023-10-30T14:37:08.406Z",
+						"updated_at": "2024-03-01T09:39:16.000Z"
+					}
+				},
+				"company": null
+			},
+			{
+				"id": "ada0423c-1e3d-43c3-87f6-439fac32c91a",
+				"fouls": 0,
+				"group_fouls": 0,
+				"task_id": "0d03eb82-2ce7-4055-a860-57168191a4c9",
+				"executor_id": "668d1c18-2d51-4724-96ad-6b530ba4e29d",
+				"company_id": null,
+				"skill": null,
+				"financial_record_id": null,
+				"value": 0,
+				"leader": false,
+				"filed": false,
+				"created_at": "2024-04-29T14:29:59.000Z",
+				"updated_at": "2024-04-29T14:29:59.000Z",
+				"executor": {
+					"id": "668d1c18-2d51-4724-96ad-6b530ba4e29d",
+					"name": "CLAUDEMIR SILVA DA GUIA",
+					"cpf": "79936300106",
+					"pis": "19018008527",
+					"cnpj": null,
+					"disc": null,
+					"contract_type": "Avanci - Registro",
+					"rg": "10439366",
+					"voter_title": null,
+					"email": null,
+					"push": null,
+					"meta": {},
+					"skills": [
+						"Ajudante"
+					],
+					"skill_id": "83c3c8c6-70eb-4dae-9608-2a05db9159f8",
+					"birthday": "1975-12-30",
+					"gender": "Masculino",
+					"phone": "65992733090",
+					"shirt_size": null,
+					"pants_size": null,
+					"boot_size": null,
+					"permission": null,
+					"active": true,
+					"password": null,
+					"created_at": "2022-05-06T15:28:31.000Z",
+					"updated_at": "2024-03-28T15:57:39.000Z",
+					"skill": {
+						"id": "83c3c8c6-70eb-4dae-9608-2a05db9159f8",
+						"name": "Ajudante",
+						"active": true,
+						"created_at": "2023-10-30T14:37:08.406Z",
+						"updated_at": "2024-03-01T15:17:04.000Z"
+					}
+				},
+				"company": null
+			}
+		],
+		"task_service_orders": [
+			{
+				"id": "c9fe406c-9855-48c3-aea8-738cf6431ff2",
+				"amount": 4.5,
+				"calc": "(1.5*3)",
+				"calc_list": [
+					{
+						"v1": "1,5",
+						"discounts": [],
+						"description": "Aplicação em TETO",
+						"squareMeterType": "Comp",
+						"v2": "3"
+					}
+				],
+				"note": "Aplicação em TETO (Larg 1,5*Comp 3)",
+				"note_revision": null,
+				"finish": false,
+				"task_id": "0d03eb82-2ce7-4055-a860-57168191a4c9",
+				"value_executor": 750,
+				"value_supervisor": null,
+				"service_order_id": "be3ed5fb-bcb0-48f2-bf9d-588eae769be1",
+				"created_at": "2024-04-27T10:33:31.000Z",
+				"updated_at": "2024-04-27T14:57:05.360Z",
+				"service_order": {
+					"id": "be3ed5fb-bcb0-48f2-bf9d-588eae769be1",
+					"amount": 4.5,
+					"note": "Aplicação em TETO (Larg 1,5*Comp 3)",
+					"calc": "(1.5*3)",
+					"calc_list": [
+						{
+							"v1": "1,5",
+							"discounts": [],
+							"description": "Aplicação em TETO",
+							"squareMeterType": "Comp",
+							"v2": "3"
+						}
+					],
+					"status": null,
+					"filed": false,
+					"service_id": "884582d4-d24d-426e-ae26-ea28b07b73e7",
+					"filed_engineer_id": null,
+					"engineer_id": "5ddad610-8287-4930-9b4d-5eabe8eb2dea",
+					"place_id": "e4261788-9d09-469e-bf35-3421e6421bcd",
+					"department_id": "52fd0cbb-6390-4b7c-a866-22638e689678",
+					"service_order_header_id": "e9436c09-9d69-4863-8638-f63af3012b17",
+					"created_at": "2024-04-16T09:22:29.000Z",
+					"updated_at": "2024-04-16T09:22:29.000Z",
+					"service": {
+						"id": "884582d4-d24d-426e-ae26-ea28b07b73e7",
+						"description": "PREPARAÇÃO PARA PINTURA EPÓXI.",
+						"category": "PINTURA",
+						"unity": "Metro²",
+						"active": true,
+						"sinapi": null,
+						"value": 10,
+						"value_executor": 1.64,
+						"value_supervisor": 0.1,
+						"value_outsourced": null,
+						"created_at": "2023-12-06T13:02:17.000Z",
+						"updated_at": "2023-12-06T13:02:17.000Z"
+					},
+					"department": {
+						"id": "52fd0cbb-6390-4b7c-a866-22638e689678",
+						"name": "COBERTURA RECEPÇÃO ADM",
+						"place_id": "e4261788-9d09-469e-bf35-3421e6421bcd",
+						"active": true,
+						"created_at": "2024-02-26T10:19:31.000Z",
+						"updated_at": "2024-02-26T10:19:31.000Z"
+					}
+				}
+			},
+			{
+				"id": "be76102a-6a38-4e11-a92d-93bb872d80f2",
+				"amount": 4,
+				"calc": "(4)",
+				"calc_list": [
+					{
+						"v1": "4",
+						"discounts": []
+					}
+				],
+				"note": "(4)",
+				"note_revision": null,
+				"finish": false,
+				"task_id": "0d03eb82-2ce7-4055-a860-57168191a4c9",
+				"value_executor": 320,
+				"value_supervisor": null,
+				"service_order_id": "8f97bed5-927e-4fb9-82d5-3ae715dba001",
+				"created_at": "2024-04-27T10:33:43.000Z",
+				"updated_at": "2024-04-27T14:57:11.617Z",
+				"service_order": {
+					"id": "8f97bed5-927e-4fb9-82d5-3ae715dba001",
+					"amount": 4,
+					"note": "(4)",
+					"calc": "(4)",
+					"calc_list": [
+						{
+							"v1": "4",
+							"discounts": []
+						}
+					],
+					"status": null,
+					"filed": false,
+					"service_id": "4e1e5615-5d93-48d0-89a8-132c224e35aa",
+					"filed_engineer_id": null,
+					"engineer_id": "5ddad610-8287-4930-9b4d-5eabe8eb2dea",
+					"place_id": "e4261788-9d09-469e-bf35-3421e6421bcd",
+					"department_id": "bb859269-f082-42b3-9f0b-7ca58fcf8f19",
+					"service_order_header_id": "b7469d98-339b-4c46-84e4-d5d40cc0f07f",
+					"created_at": "2024-04-09T17:48:43.000Z",
+					"updated_at": "2024-04-09T17:48:43.000Z",
+					"service": {
+						"id": "4e1e5615-5d93-48d0-89a8-132c224e35aa",
+						"description": "DISPOSITIVO DPS CLASSE II, 1 POLO, TENSAO MAXIMA DE 175 V, CORRENTE MAXIMA DE *45* KA (TIPO AC)\t",
+						"category": "ELÉTRICA",
+						"unity": "Unidade",
+						"active": true,
+						"sinapi": null,
+						"value": 89.29,
+						"value_executor": 1.11,
+						"value_supervisor": 0.89,
+						"value_outsourced": null,
+						"created_at": "2023-11-28T13:47:58.000Z",
+						"updated_at": "2023-11-28T13:47:58.000Z"
+					},
+					"department": {
+						"id": "bb859269-f082-42b3-9f0b-7ca58fcf8f19",
+						"name": "CABINE DE ENERGIA - CASA DE MAQUINAS",
+						"place_id": "e4261788-9d09-469e-bf35-3421e6421bcd",
+						"active": true,
+						"created_at": "2024-02-23T15:08:08.000Z",
+						"updated_at": "2024-02-23T15:08:08.000Z"
+					}
+				}
+			},
+			{
+				"id": "165b2fa7-d842-4663-bd00-9c61e29f2e80",
+				"amount": 9,
+				"calc": "(0.6*15)",
+				"calc_list": [
+					{
+						"v1": "0,6",
+						"discounts": [],
+						"description": "Demolição de contrapiso para passagem de eletroduto corrugado",
+						"squareMeterType": "Comp",
+						"v2": "15"
+					}
+				],
+				"note": "Demolição de contrapiso para passagem de eletroduto corrugado (Larg 0,6*Comp 15)",
+				"note_revision": null,
+				"finish": false,
+				"task_id": "0d03eb82-2ce7-4055-a860-57168191a4c9",
+				"value_executor": 1800,
+				"value_supervisor": null,
+				"service_order_id": "de4711d5-02fa-4e5c-a791-e8b4eb90aee3",
+				"created_at": "2024-04-27T10:33:37.000Z",
+				"updated_at": "2024-04-27T14:57:16.546Z",
+				"service_order": {
+					"id": "de4711d5-02fa-4e5c-a791-e8b4eb90aee3",
+					"amount": 9,
+					"note": "Demolição de contrapiso para passagem de eletroduto corrugado (Larg 0,6*Comp 15)",
+					"calc": "(0.6*15)",
+					"calc_list": [
+						{
+							"v1": "0,6",
+							"discounts": [],
+							"description": "Demolição de contrapiso para passagem de eletroduto corrugado",
+							"squareMeterType": "Comp",
+							"v2": "15"
+						}
+					],
+					"status": null,
+					"filed": false,
+					"service_id": "5faa3627-77f7-459a-9540-9fa8fee84218",
+					"filed_engineer_id": null,
+					"engineer_id": "5ddad610-8287-4930-9b4d-5eabe8eb2dea",
+					"place_id": "e4261788-9d09-469e-bf35-3421e6421bcd",
+					"department_id": "bb859269-f082-42b3-9f0b-7ca58fcf8f19",
+					"service_order_header_id": "b7469d98-339b-4c46-84e4-d5d40cc0f07f",
+					"created_at": "2024-04-02T15:06:57.000Z",
+					"updated_at": "2024-04-02T15:06:57.000Z",
+					"service": {
+						"id": "5faa3627-77f7-459a-9540-9fa8fee84218",
+						"description": "DEMOLICAO DE PISO DE CONCRETO ",
+						"category": "SERVIÇOS PRELIMINARES",
+						"unity": "Metro²",
+						"active": true,
+						"sinapi": "XXX",
+						"value": 20,
+						"value_executor": 2.08,
+						"value_supervisor": 0.02,
+						"value_outsourced": null,
+						"created_at": "2023-11-14T08:21:01.000Z",
+						"updated_at": "2023-11-14T08:21:01.000Z"
+					},
+					"department": {
+						"id": "bb859269-f082-42b3-9f0b-7ca58fcf8f19",
+						"name": "CABINE DE ENERGIA - CASA DE MAQUINAS",
+						"place_id": "e4261788-9d09-469e-bf35-3421e6421bcd",
+						"active": true,
+						"created_at": "2024-02-23T15:08:08.000Z",
+						"updated_at": "2024-02-23T15:08:08.000Z"
+					}
+				}
+			}
+		],
+		"created_by": {
+			"id": "83405c94-55cf-4b90-8307-ff0b778bc0e1",
+			"name": "IZABELA VIRGÍNIA ANDRADE ROSA ",
+			"cpf": "11145571611",
+			"pis": "20399209918",
+			"cnpj": "31300696000103",
+			"disc": "Conformidade",
+			"contract_type": null,
+			"rg": null,
+			"voter_title": null,
+			"email": "izabelaandrade7@gmail.com",
+			"push": {
+				"endpoint": "https://fcm.googleapis.com/fcm/send/d4CqRd30MpY:APA91bEakhHog5zJgC6MDfhKUj_WalFMXlEwQs2hyknKB-ydgQfohFwger9ZoGd2dY7cQVcXywROWPrwLb5YANcP2NTQsDGpR0knQXlOQR1P9K8xxj8BSU3skMEzwkGjVag1qJAw87uF",
+				"expirationTime": null,
+				"keys": {
+					"p256dh": "BCmUqLjwjPWsLTrZqG-i1hLNMs0srIVkyWykFr8QZukL3Ivx9fmSvTJGIwyNqmfyM1kHTkSZiPSaEQdpLPCMrP8",
+					"auth": "Dq7o5I0DyKaZM3ztjpVizg"
+				}
+			},
+			"meta": {
+				"motherName": "",
+				"fatherName": "",
+				"ctps": "",
+				"spouseName": ""
+			},
+			"skills": [
+				"Engenheiro(a)"
+			],
+			"skill_id": "ad593ef0-6965-4d01-aabf-fd2b45cd1be4",
+			"birthday": "1992-06-17",
+			"gender": "Feminino",
+			"phone": "65981720708",
+			"shirt_size": "Pequeno",
+			"pants_size": "Pequeno",
+			"boot_size": "35",
+			"permission": [
+				"Administrador"
+			],
+			"active": true,
+			"password": "$2a$08$1wTXZovCnzYS8XwcefgM5OP7bCn065HqSYVjqGyJtQ3iaJmvhQfXm",
+			"created_at": "2020-11-23T14:53:03.000Z",
+			"updated_at": "2023-10-02T18:08:18.000Z"
+		},
+		"place": {
+			"id": "e4261788-9d09-469e-bf35-3421e6421bcd",
+			"name": "HOSPITAL REGIONAL DE SINOP ",
+			"address_id": "ca9cbc55-2cd9-4f96-9291-7558dd1e0b3f",
+			"active": true,
+			"created_at": "2022-02-24T15:32:33.000Z",
+			"updated_at": "2022-02-24T15:32:33.000Z"
+		}
+	}
+]

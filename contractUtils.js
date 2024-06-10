@@ -14,6 +14,8 @@ moment.updateLocale('pt', {
     ]
 });
 
+const leadership = true;
+
 function capitalizeString(string) {
     const slice = string.toLowerCase().trim().split(' ');
     for (let i = 0; i < slice.length; i++) {
@@ -374,9 +376,9 @@ function createEpiProductsTable(productRows){
 
 async function getSkillProducts(id){
     try {
-        const response = await axios.get(`https://3337-avanciconstru-apiserver-i1jsgtd4yo0.ws-us110.gitpod.io/skillproducts?skill_id=${id}`, {
+        const response = await axios.get(`https://3337-avanciconstru-apiserver-liom39gdw1s.ws-us114.gitpod.io/skillproducts?skill_id=${id}`, {
             headers: {
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTU5NjYwMDgsImV4cCI6MTc2NzgwNjAwOCwic3ViIjoiZjM1ZDg2M2QtMmI4My00MGM4LWI4ZDUtM2ExNzU5YTU2NTc2In0.eK88F638zrMQ7x6WDgrX6eAOBE4M4jklTlTZVTuOlOk`
+            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTgwNTA5NjksImV4cCI6MTc2OTg5MDk2OSwic3ViIjoiZjM1ZDg2M2QtMmI4My00MGM4LWI4ZDUtM2ExNzU5YTU2NTc2In0.RVOvNkHAqsTmp_iRfvu28sbeMbwfauCA4E7_7fWpp78`
         }});
         return response.data;
     } catch (error) {
@@ -387,9 +389,9 @@ async function getSkillProducts(id){
 
 async function getShiftTurn(id){
     try {
-        const response = await axios.get(`https://3337-avanciconstru-apiserver-i1jsgtd4yo0.ws-us114.gitpod.io/timeclock/turno?id=${id}`, {
+        const response = await axios.get(`https://3337-avanciconstru-apiserver-liom39gdw1s.ws-us114.gitpod.io/timeclock/turno?id=${id}`, {
             headers: {
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTYzODAwMTAsImV4cCI6MTc2ODIyMDAxMCwic3ViIjoiZjM1ZDg2M2QtMmI4My00MGM4LWI4ZDUtM2ExNzU5YTU2NTc2In0.JCxRXmEFbmjV-G9SZ9sdmMYXeFeDlZdyGY11b03ERWA`
+            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTgwNTA5NjksImV4cCI6MTc2OTg5MDk2OSwic3ViIjoiZjM1ZDg2M2QtMmI4My00MGM4LWI4ZDUtM2ExNzU5YTU2NTc2In0.RVOvNkHAqsTmp_iRfvu28sbeMbwfauCA4E7_7fWpp78`
         }});
         console.log(response.data)
         return response.data;
@@ -1052,7 +1054,7 @@ function createXPContract(){
                     text: "CONTRATO DE EXPERIÊNCIA",
                     bold: true,
                     size: 36,
-                    font: "Arial",
+                    font: "Calibri",
                 })
             ],
             alignment: AlignmentType.CENTER,
@@ -1068,7 +1070,7 @@ function createClauseHeader(text){
                     text: text,
                     bold: true,
                     size: 28,
-                    font: "Arial",
+                    font: "Calibri",
                 })
             ],
             indent: {
@@ -1190,6 +1192,507 @@ async function createShiftText(user){
     }    
 }
 
+async function createShiftContent(user, leadership){
+    try {
+        if(leadership){
+            return [ 
+                new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                        left: convertInchesToTwip(0.5),
+                        right: convertInchesToTwip(0.5),
+                    },
+                    spacing: {
+                        line: 276,
+                        before: 200,
+                    },
+                    children: [
+                        new TextRun({
+                            text: '4.1 ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'Em se tratando de cargo de confiança, valendo-se do que dispõe a CLT no que tange à jornada de trabalho, não haverá controle de jornada, não fazendo jus o colaborador ao percebimento, dentre outras, das seguintes verbas/direitos:',
+                            font: "Calibri Light",
+                        }),
+                    ]
+                }),
+                new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                        left: convertInchesToTwip(1.5),
+                    },
+                    spacing: {
+                        line: 276,
+                        before: 200,
+                    },
+                    children: [
+                        new TextRun({
+                            text: 'I. ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'adicional de horas extras',
+                            font: "Calibri Light",
+                        }),
+                    ],
+                }),
+                new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                        left: convertInchesToTwip(1.5),
+                    },
+                    spacing: {
+                        line: 276,
+                        before: 200,
+                    },
+                    children: [
+                        new TextRun({
+                            text: 'II. ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'adicional noturno',
+                            font: "Calibri Light",
+                        }),
+                    ],
+                }),
+                new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                        left: convertInchesToTwip(1.5),
+                    },
+                    spacing: {
+                        line: 276,
+                        before: 200,
+                    },
+                    children: [
+                        new TextRun({
+                            text: 'III. ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'intervalo interjornada',
+                            font: "Calibri Light",
+                        }),
+                    ],
+                }),
+                new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                        left: convertInchesToTwip(1.5),
+                    },
+                    spacing: {
+                        line: 276,
+                        before: 200,
+                    },
+                    children: [
+                        new TextRun({
+                            text: 'IV. ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'intervalo intrajornada',
+                            font: "Calibri Light",
+                        }),
+                    ],
+                }),
+            ]
+        } else {
+            return [
+                new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                        left: convertInchesToTwip(0.5),
+                        right: convertInchesToTwip(0.5),
+                    },
+                    spacing: {
+                        line: 276,
+                        before: 200,
+                    },
+                    children: [
+                        new TextRun({
+                            text: '4.1 ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'A jornada será de 44 horas semanais distribuídas da seguinte maneira:',
+                            font: "Calibri Light",
+                        }),
+                        
+                    ],
+                }),
+                await createShiftText(user),
+                new Paragraph({
+                        alignment: AlignmentType.JUSTIFIED,
+    
+                    indent: {
+                        left: convertInchesToTwip(0.5),
+                        right: convertInchesToTwip(0.5),
+                    },
+                    spacing: {
+                        line: 276,
+                        before: 300,
+                    },
+                    children: [
+                        new TextRun({
+                            text: '4.2 ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'O(a) ',
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            text: 'EMPREGADO(A) ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'se compromete a trabalhar em regime de compensação e de prorrogação de horas, inclusive em período noturno, sempre que as necessidades assim o exigirem, observadas as formalidades legais.',
+                            font: "Calibri Light",
+                        }),
+                    ],
+                }),
+                new Paragraph({
+                        alignment: AlignmentType.JUSTIFIED,
+    
+                    indent: {
+                        left: convertInchesToTwip(0.5),
+                        right: convertInchesToTwip(0.5),
+                    },
+                    spacing: {
+                        line: 276,
+                        before: 200,
+                    },
+                    children: [
+                        new TextRun({
+                            text: '4.3 ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'Neste ato, o(a) ',
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            text: 'EMPREGADO(A) ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'está ciente de que apenas poderá trabalhar fora do horário de trabalho se previamente autorizado por seu gestor ou com fulcro no art. 59 §5º da CLT, referente ao banco de horas, a reger-se sob com as seguintes regras:',
+                            font: "Calibri Light",
+                        }),
+                    ],
+                }),
+                new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                        left: convertInchesToTwip(0.5),
+                        right: convertInchesToTwip(0.5),
+                    },
+                    spacing: {
+                        line: 276,
+                        before: 300,
+                    },
+                    children: [
+                        new TextRun({
+                            text: 'A. ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'A jornada extra será limitada a 2 (duas) horas por dia;',
+                            font: "Calibri Light",
+                        }),
+                    ],
+                }),
+                new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                        left: convertInchesToTwip(0.5),
+                        right: convertInchesToTwip(0.5),
+                    },
+                    spacing: {
+                        line: 276,
+                        before: 200,
+                    },
+                    children: [
+                        new TextRun({
+                            text: 'B. ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'A compensação será realizada na proporção 1x1 (uma hora extra trabalhada corresponderá uma hora de folga).',
+                            font: "Calibri Light",
+                        }),
+                    ],
+                }),
+                new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                        left: convertInchesToTwip(0.5),
+                        right: convertInchesToTwip(0.5),
+                    },
+                    spacing: {
+                        line: 276,
+                        before: 200,
+                    },
+                    children: [
+                        new TextRun({
+                            text: 'C. ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'O prazo para compensação será de 06 meses, contados a partir da inclusão da hora realizada ao Banco de Horas. Caso haja disposição contrária em instrumento coletivo da categoria, esta prevalecerá.',
+                            font: "Calibri Light",
+                        }),
+                    ],
+                }),
+                new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                        left: convertInchesToTwip(0.5),
+                        right: convertInchesToTwip(0.5),
+                    },
+                    spacing: {
+                        line: 276,
+                        before: 200,
+                    },
+                    children: [
+                        new TextRun({
+                            text: 'D. ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'A data para desfrutar da compensação está sujeita à aprovação por parte do(a)',
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            text: 'EMPREGADOR(A) ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'e deve ser solicitada pelo(a) ',
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            text: 'EMPREGADO(A) ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'com antecedência mínima de 15 dias, afim de não prejudicar a operacionalização das atividades da empresa.',
+                            font: "Calibri Light",
+                        }),
+                    ],
+                }),
+                new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                        left: convertInchesToTwip(0.5),
+                        right: convertInchesToTwip(0.5),
+                    },
+                    spacing: {
+                        line: 276,
+                        before: 200,
+                    },
+                    children: [
+                        new TextRun({
+                            text: '4.4 ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'O(A)',
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            text: 'EMPREGADO(A) ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'aceita que poderá laborar em sábados, domingos e feriados, conforme escala divulgada e respeitando a legislação a respeito do tema.',
+                            font: "Calibri Light",
+                        }),
+                    ],
+                }),
+                new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                        left: convertInchesToTwip(0.5),
+                        right: convertInchesToTwip(0.5),
+                    },
+                    spacing: {
+                        line: 276,
+                        before: 200,
+                    },
+                    children: [
+                        new TextRun({
+                            text: '4.5 ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'Não será tolerado descumprimentos nas políticas de horários, não podendo atrasar mais que 10 minutos no total por dia e atrasos injustificados. Em caso de faltas, levar o atestado em até 48 horas imediatamente subsequentes. Faltas sem atestados podem ser descontadas na folha de pagamento e poderá ser aplicada advertência.',
+                            font: "Calibri Light",
+                        }),
+                    ],
+                }),
+                new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                        left: convertInchesToTwip(0.5),
+                        right: convertInchesToTwip(0.5),
+                    },
+                    spacing: {
+                        line: 276,
+                        before: 200,
+                    },
+                    children: [
+                        new TextRun({
+                            text: '4.6 ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'Ao funcionário é vedado realizar jornada extraordinária sem autorização da direção.',
+                            font: "Calibri Light",
+                        }),
+                    ],
+                }),
+                new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                        left: convertInchesToTwip(0.5),
+                        right: convertInchesToTwip(0.5),
+                    },
+                    spacing: {
+                        line: 276,
+                        before: 200,
+                    },
+                    children: [
+                        new TextRun({
+                            text: '4.7 ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'É vedado ao funcionário, em qualquer hipótese, realizar repouso intrajornada inferior a 1 (uma) hora.',
+                            font: "Calibri Light",
+                        }),
+                    ],
+                }),
+                new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                        left: convertInchesToTwip(0.5),
+                        right: convertInchesToTwip(0.5),
+                    },
+                    spacing: {
+                        line: 276,
+                        before: 200,
+                    },
+                    children: [
+                        new TextRun({
+                            text: '4.8 ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'As folgas poderão ser participadas pelo funcionário, entretanto, somente serão concedidas por expressa previsão da direção.',
+                            font: "Calibri Light",
+                        }),
+                    ],
+                }),
+                new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                        left: convertInchesToTwip(0.5),
+                        right: convertInchesToTwip(0.5),
+                    },
+                    spacing: {
+                        before: 200,
+                        line: 276,
+                    },
+                    children: [
+                        new TextRun({
+                            text: '4.9 ',
+                            size: 24,
+                            bold: true,
+                            font: "Calibri Light",
+                        }),
+                        new TextRun({
+                            size: 24,
+                            text: 'As ditas folgas somente serão concedidas caso o colaborador tenha saldo positivo de horas ou caso se trate de folga compensatória de feriados, sendo vedado banco de horas negativo.',
+                            font: "Calibri Light",
+                        }),
+                    ],
+                }),
+            ]
+        }
+    }catch(error){
+        console.log('erro no create shiftcontetn')
+    }
+}
+
 function createTimeStamp(user){
     return [
         new Paragraph({
@@ -1211,6 +1714,920 @@ function createTimeStamp(user){
             ],
         }),
     ]
+}
+
+function createMotoristaLaborPlaceClause(user){
+    if(user.skill.name === 'Motorista'){
+        return [
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+
+            indent: {
+                left: convertInchesToTwip(0.5),
+                right: convertInchesToTwip(0.5),
+            },
+            spacing: {
+                line: 276,
+                before: 200,
+            },
+            children: [
+                new TextRun({
+                    text: '6.5 ',
+                    size: 24,
+                    bold: true,
+                    font: "Calibri Light",
+                }),
+                new TextRun({
+                    size: 24,
+                    text: 'A atividade do colaborador poderá se operar em viagens, hipótese em que através de diárias de viagem lhe serão indenizadas as despesas com hospedagem e alimentação, observado os limites impostos pela empresa em suas comunicações, normas e procedimentos internos.',
+                    font: "Calibri Light",
+                }),
+            ],
+        }),
+        ]
+    }
+    return []
+}
+
+function createPaymentContent(user, leadership){
+    if(leadership){
+        return [ 
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '3.1 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'O(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'receberá pelos serviços prestados do(a) ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: `a quantia de R$ ${user.skill.salary_base} (${extenso(user.skill.salary_base.toString().replace('.', ','), { mode: 'currency' })}), mensais no quinto dia útil do mês subsequente.`,
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: 'Além do salário base, o(a) ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'terá direito aos seguintes benefícios:',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: 'A. ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'ALIMENTAÇÃO NO LOCAL: O(A) ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'fornecerá ao ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'almoço e café da manhã durante os dias de trabalho.',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: 'D. ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'PREMIAÇÃO POR TAREFAS EXCEPCIONAIS: O(A) ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'poderá conceder premiações adicionais ao ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'pela realização de tarefas excepcionais, conforme critérios a serem estabelecidos pelo(a) ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                ],
+            })
+        ]
+    } else {
+        return [
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '3.1 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'O(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'receberá pelos serviços prestados do(a) ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: `a quantia de R$ ${user.skill.salary_base} (${extenso(user.skill.salary_base.toString().replace('.', ','), { mode: 'currency' })}), mensais no quinto dia útil do mês subsequente.`,
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+                    indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: 'Além do salário base, o(a) ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'terá direito aos seguintes benefícios:',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: 'A. ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'ALIMENTAÇÃO NO LOCAL: O(A) ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'fornecerá ao ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'almoço e café da manhã durante os dias de trabalho.',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: 'B. ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'PRÊMIO POR ASSIDUIDADE: O(A) ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'terá direito a um prêmio caso não tenha faltas injustificadas durante o mês, conforme função e localidade',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: 'C. ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'AUXÍLIO TRANSPORTE: O(A) ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'concederá auxílio transporte referente aos dias úteis em que o ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'comparecer ao trabalho.',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: 'D. ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'PREMIAÇÃO POR TAREFAS EXCEPCIONAIS: O(A) ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'poderá conceder premiações adicionais ao ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'pela realização de tarefas excepcionais, conforme critérios a serem estabelecidos pelo(a) ',
+                        size: 24,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                ],
+            })
+        ]
+    }
+}
+
+function createClause12Paragraph(user){
+    if(user.skill.name === 'Motorista'){
+        return [
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 300,
+                },
+                children: [
+                    new TextRun({
+                        text: '12.6  ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'A perda da habilitação para o cargo é motivo para justa causa.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 300,
+                },
+                children: [
+                    new TextRun({
+                        text: '12.7  ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'A utilização do veículo da empresa em qualquer tipo de atividade de cunho pessoal é expressamente proibida.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 300,
+                },
+                children: [
+                    new TextRun({
+                        text: '12.8  ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'Fica proibido tratar de trabalho após o expediente em qualquer meio telemático.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 300,
+                },
+                children: [
+                    new TextRun({
+                        text: '12.9  ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'E por estarem em pleno acordo, as partes contratantes assinam o presente Contrato de Experiência em duas vias, ficando a primeira em poder do(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A), ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'e a segunda com o(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A), ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                ],
+            })
+        ]
+    } else {
+        return [
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 300,
+                },
+                children: [
+                    new TextRun({
+                        text: '12.6  ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'Fica proibido tratar de trabalho após o expediente em qualquer meio telemático.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 300,
+                },
+                children: [
+                    new TextRun({
+                        text: '12.7  ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'E por estarem em pleno acordo, as partes contratantes assinam o presente Contrato de Experiência em duas vias, ficando a primeira em poder do(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A), ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'e a segunda com o(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A), ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                ],
+            })
+        ]
+    }
+}
+
+function createLaborPlace(user, leadership){
+    if(leadership){
+        return [
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '6.1 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'O(A) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'desempenhará suas funções, já estabelecidas no presente contrato, ao(à) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A)',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: `no seguinte endereço: ${capitalizeString(user.address.address)}, nº ${user.address.number}, complemento: ${user.address.complement ? capitalizeString(user.address.complement) : 'Não informado'}, ${capitalizeString(user.address.neighborhood)}, ${user.address.city.name}, ${user.address.state.name}, CEP: ${user.address.postal_code}.`,
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '6.2 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'O(A) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'poderá ser transferido(a),independente da alteração de domicílio, tendo em vista a natureza do cargo; ',
+                        font: "Calibri Light",
+                    }),
+                ],
+            })
+        ]
+    } else {
+        return [
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '6.1 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'O(A) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'desempenhará suas funções, já estabelecidas no presente contrato, ao(à) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A)',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: `no seguinte endereço: ${capitalizeString(user.address.address)}, nº ${user.address.number}, complemento: ${user.address.complement ? capitalizeString(user.address.complement) : 'Não informado'}, ${capitalizeString(user.address.neighborhood)}, ${user.address.city.name}, ${user.address.state.name}, CEP: ${user.address.postal_code}.`,
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '6.2 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'O(A) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'poderá transferir o(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'entre, filiais, unidades do mesmo grupo econômico ou caso haja mudança de endereço da empresa, sem pagamento de qualquer adicional, desde que a mudança não importe a alteração do domicílio.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '6.3 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'Caso o(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'seja promovido a cargo de confiança, a vedação presente na cláusula anterior não se aplica, podendo o mesmo ser transferido, independente da alteração de domicílio, tendo em vista a natureza do cargo.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '6.4 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'Durante a vigência deste contrato, o(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A) ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'poderá ser transferido de forma provisória ou definitiva, para exercer sua função em localidade diversa daquela acima indicada, havendo mudança de domicílio, desde que haja a sua anuência ou que sejam verificadas as hipóteses legais tal como previsto no artigo 469 da Consolidação das Leis do Trabalho.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            ...createMotoristaLaborPlaceClause(user),
+        ]
+    }
 }
 
 function createSignSection(user, doc, company){
@@ -1597,7 +3014,7 @@ function createRenew(user, doc, company){
                         text: "TERMO DE RENOVAÇÃO",
                         bold: true,
                         size: 36,
-                        font: "Arial",
+                        font: "Calibri",
                     })
                 ],
                 alignment: AlignmentType.CENTER,
@@ -1738,6 +3155,10 @@ function createAttributionsSection(attributions, doc) {
     const section = {
         properties: {
             type: SectionType.CONTINUOUS,
+            column: {
+                space: 790,
+                count: 3,
+            },
             page:{
                 margin: {
                     top: 800,     
@@ -1778,6 +3199,667 @@ function createAttributionsSection(attributions, doc) {
         children: assignments,
     }
     doc.addSection(section);
+}
+
+function createLastClausesConditional(){
+    if(leadership){
+        return [
+            createClauseHeader('CLÁUSULA XII - DA VEDAÇÃO AO RECRUTAMENTO'),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '12.0 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'O(A) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A), ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'está vedado de recrutar qualquer empregado do EMPREGADOR, mesmo após o término da vigência deste contrato.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '12.1 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'A vedação ao recrutamento perdurará pelo prazo de 60 (sessenta) dias contado da data de extinção deste contrato. Após esse período a presente cláusula perde sua vigência.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '12.2 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'O descumprimento desta cláusula poderá gerar a rescisão contratual, devendo o(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A), ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'pagar a multa no valor de R$5.000,00 (cinco mil reais), a ser devidamente atualizada e corrigida no momento de sua aplicação e, ainda, estará sujeito a eventuais penalidades civis e criminais eventualmente aplicáveis.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            createClauseHeader('CLÁUSULA XIII - DA EXCLUSIVIDADE DO VÍNCULO EMPREGATÍCIO'),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '13.0 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'Durante a vigência do presente instrumento, o(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A), ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'se compromete a manter a exclusividade do vínculo empregatício com o(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A), ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'sendo-lhe vedada prestar serviços ou constituir quaisquer outros contratos de natureza trabalhista, com particulares ou com pessoas jurídicas.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '13.1 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'É vedado ao ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A), ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'constituir empresa que preste os mesmos serviços e na mesma área geográfica onde são prestados os serviços comercializados pelo ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A). ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'Essa obrigação perdurará pelo prazo de vigência do contrato de trabalho se estendendo a 06 meses após a extinção desse.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '13.2 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'O descumprimento desta cláusula poderá gerar a rescisão contratual, devendo o(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A), ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'pagar multa no valor de R$10.000,00 (dez mil reais), a ser devidamente atualizada e corrigida no momento de sua aplicação, e, ainda, estará sujeito a eventuais penalidades civis e criminais eventualmente aplicáveis.',
+                        font: "Calibri Light",
+                    })
+                ],
+            }),
+            createClauseHeader('CLÁUSULA XIV - DAS DISPOSIÇÕES GERAIS'),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '14.1 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'Qualquer ato que configure concorrência ao empregador é considerado falta grave, sendo ao empregado vedado trabalhar em qualquer empresa da concorrência ou até mesmo por conta própria nas mesmas atividades do empregador durante a duração do contrato de trabalho.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '14.2 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'Ainda que não realizada no mesmo ramo da empresa, atividades paralelas que causem prejuízo ao cumprimento da função também poderão gerar, conforme o caso, demissão por justo motivo.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '14.3 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'Também incorre em justa causa aquele colaborador que se utiliza dos benefícios e prerrogativas dos funcionários para adquirir produtos/insumos ou afins e repassá-los a terceiros, sem o consentimento expresso da empregadora, independentemente de ter auferido ganhos para si ou para outrem.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '14.4 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'É vedado ao empregado(a), receber qualquer tipo de contraprestação, comissões, glosas, gorjetas de fornecedores, clientes ou terceiros, sem o consentimento expresso do empregador.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '14.5 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'Conforme dispõe a CLT em seu art. 2º, é o empregador quem dirige a prestação pessoal de serviço. Assim, fica estipulado que é expressamente proibida a utilização de celular ou de outro aparelho eletrônico que se assemelhe (tablet, smartwatch, etc) durante a jornada de trabalho para assuntos de cunho pessoal.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '14.6 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'Considerando que a EMPREGADORA disponibiliza para o EMPREGADO(A) os equipamentos de tecnologia da informação, e que estes são concedidos exclusivamente para atividades laborativas, poderá a EMPREGADORA fiscalizar e ter acesso a qualquer informação constante no referido equipamento, desde que armazenado no mesmo e independentemente da sua origem. ',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '14.7 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'O(A) EMPREGADO(A) está ciente da realização de filmagem e captação de áudio no seu ambiente de trabalho, durante a sua jornada laboral, estando ciente que a respectiva filmagem visa trazer uma maior segurança em seu ambiente de trabalho.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '14.7.1 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'A EMPREGADORA não pagará nenhum valor pecuniário ao EMPREGADO pelo uso da sua imagem, sendo essa dentro da legislação civil, respeitados os locais íntimos.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '14.8 ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'O empregado(a) autoriza o uso de sua imagem e voz, em todo e qualquer material entre fotos, documentos e outros meios de comunicação, para campanhas promocionais e institucionais. A presente autorização é concedida a título gratuito, abrangendo o uso da imagem acima mencionada em todo território nacional e no exterior, sob qualquer forma e meios, ou sejam, em destaque: (I) out-door; (II) bus-door; folhetos em geral (encartes, mala direta, catálogo, etc.); (III) folder de apresentação; (IV) anúncios em revistas e jornais em geral; (V) home page; (VI) cartazes; (VII) back-light; (VIII) mídia eletrônica (painéis, vídeo-tapes, televisão, cinema, programa para rádio, entre outros); (IX) redes e mídias sociais.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        size: 24,
+                        text: 'E por estarem em pleno acordo, as partes contratantes assinam o presente Contrato de Experiência em duas vias, ficando a primeira em poder do EMPREGADOR, e a segunda com o(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A)',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+        ]
+    } else {
+        return [
+            createClauseHeader('CLÁUSULA XII - DAS DISPOSIÇÕES GERAIS'),
+            new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 200,
+                },
+                children: [
+                    new TextRun({
+                        text: '12.1  ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'Fica o(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A), ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'comunicado e ciente que durante a permanência no local de trabalho está sendo monitorado por câmeras de segurança que possuem gravações de áudio e vídeo.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 300,
+                },
+                children: [
+                    new TextRun({
+                        text: '12.2  ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'O(A) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A), ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'poderá fiscalizar e ter acesso a qualquer informação constante nos softwares utilizados no ambiente laborativo, inclusive se utilizando de programas de monitoramento.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 300,
+                },
+                children: [
+                    new TextRun({
+                        text: '12.3  ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'Conforme dispõe a CLT em seu art.2º, é o(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A), ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'quem dirige a prestação pessoal de serviço. Assim, fica estipulado que é expressamente proibida a utilização de celular pessoal ou de outro aparelho eletrônico que se assemelhe (tablet, smartwatch, etc.) durante a jornada de trabalho para tratar de qualquer assunto de interesse pessoal do funcionário.',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                    alignment: AlignmentType.JUSTIFIED,
+
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 300,
+                },
+                children: [
+                    new TextRun({
+                        text: '12.4  ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'É vedado ao(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A), ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'receber qualquer tipo de contraprestação, comissões, glosas, gorjetas de fornecedores, clientes ou terceiros, sem o consentimento expresso do(a) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADOR(A), ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            new Paragraph({
+                alignment: AlignmentType.JUSTIFIED,
+                indent: {
+                    left: convertInchesToTwip(0.5),
+                    right: convertInchesToTwip(0.5),
+                },
+                spacing: {
+                    line: 276,
+                    before: 300,
+                },
+                children: [
+                    new TextRun({
+                        text: '12.5  ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'O(A) ',
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        text: 'EMPREGADO(A), ',
+                        size: 24,
+                        bold: true,
+                        font: "Calibri Light",
+                    }),
+                    new TextRun({
+                        size: 24,
+                        text: 'autoriza o uso de sua imagem e voz, em todo e qualquer material entre fotos, documentos e outros meios de comunicação, para campanhas promocionais e institucionais. A presente autorização é concedida a título gratuito, abrangendo o uso da imagem acima mencionada em todo território nacional e no exterior, sob qualquer forma e meios, ou sejam, em destaque: (I) out-door; (II) bus-door; folhetos em geral (encartes, mala direta, catálogo, etc.); (III) folder de apresentação; (IV) anúncios em revistas e jornais em geral; (V) home page; (VI) cartazes; (VII) back-light; (VIII) mídia eletrônica (painéis, vídeo-tapes, televisão, cinema, programa para rádio, entre outros); (IX) redes e mídias sociais. ',
+                        font: "Calibri Light",
+                    }),
+                ],
+            }),
+            ...createClause12Paragraph(user),
+        ]
+    }
 }
 
 async function createNewSection(user, doc){
@@ -1893,633 +3975,9 @@ async function createNewSection(user, doc){
                 ],
             }),
             createClauseHeader('CLÁUSULA III - DA REMUNERAÇÃO E BENEFÍCIOS'),
-            new Paragraph({
-                alignment: AlignmentType.JUSTIFIED,
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: '3.1 ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'O(a) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'receberá pelos serviços prestados do(a) ',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADOR(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: `a quantia de R$ ${user.skill.salary_base} (${extenso(user.skill.salary_base.toString().replace('.', ','), { mode: 'currency' })}), mensais no quinto dia útil do mês subsequente.`,
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                    alignment: AlignmentType.JUSTIFIED,
-                    indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: 'Além do salário base, o(a) ',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'terá direito aos seguintes benefícios:',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                alignment: AlignmentType.JUSTIFIED,
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: 'A. ',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'ALIMENTAÇÃO NO LOCAL: O(A) ',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADOR(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'fornecerá ao ',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'almoço e café da manhã durante os dias de trabalho.',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                alignment: AlignmentType.JUSTIFIED,
-
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: 'B. ',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'PRÊMIO POR ASSIDUIDADE: O(A) ',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'terá direito a um prêmio caso não tenha faltas injustificadas durante o mês, conforme função e localidade',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                alignment: AlignmentType.JUSTIFIED,
-
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: 'C. ',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'AUXÍLIO TRANSPORTE: O(A) ',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADOR(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'concederá auxílio transporte referente aos dias úteis em que o ',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'comparecer ao trabalho.',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                alignment: AlignmentType.JUSTIFIED,
-
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: 'D. ',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'PREMIAÇÃO POR TAREFAS EXCEPCIONAIS: O(A) ',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADOR(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'poderá conceder premiações adicionais ao ',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'pela realização de tarefas excepcionais, conforme critérios a serem estabelecidos pelo(a) ',
-                        size: 24,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADOR(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
+            ...createPaymentContent(user, leadership),
             createClauseHeader('CLÁUSULA IV - DO HORÁRIO DE TRABALHO'),
-            new Paragraph({
-                    alignment: AlignmentType.JUSTIFIED,
-
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: '4.1 ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'A jornada será de 44 horas semanais distribuídas da seguinte maneira:',
-                        font: "Calibri Light",
-                    }),
-                    
-                ],
-            }),
-            //JORNADA DE TRABALHO
-            await createShiftText(user),
-            new Paragraph({
-                    alignment: AlignmentType.JUSTIFIED,
-
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 300,
-                },
-                children: [
-                    new TextRun({
-                        text: '4.2 ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'O(a) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'se compromete a trabalhar em regime de compensação e de prorrogação de horas, inclusive em período noturno, sempre que as necessidades assim o exigirem, observadas as formalidades legais.',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                    alignment: AlignmentType.JUSTIFIED,
-
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: '4.3 ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'Neste ato, o(a) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'está ciente de que apenas poderá trabalhar fora do horário de trabalho se previamente autorizado por seu gestor ou com fulcro no art. 59 §5º da CLT, referente ao banco de horas, a reger-se sob com as seguintes regras:',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                alignment: AlignmentType.JUSTIFIED,
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 300,
-                },
-                children: [
-                    new TextRun({
-                        text: 'A. ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'A jornada extra será limitada a 2 (duas) horas por dia;',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                alignment: AlignmentType.JUSTIFIED,
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: 'B. ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'A compensação será realizada na proporção 1x1 (uma hora extra trabalhada corresponderá uma hora de folga).',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                alignment: AlignmentType.JUSTIFIED,
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: 'C. ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'O prazo para compensação será de 06 meses, contados a partir da inclusão da hora realizada ao Banco de Horas. Caso haja disposição contrária em instrumento coletivo da categoria, esta prevalecerá.',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                alignment: AlignmentType.JUSTIFIED,
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: 'D. ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'A data para desfrutar da compensação está sujeita à aprovação por parte do(a)',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADOR(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'e deve ser solicitada pelo(a) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'com antecedência mínima de 15 dias, afim de não prejudicar a operacionalização das atividades da empresa.',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                alignment: AlignmentType.JUSTIFIED,
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: '4.4 ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'O(A)',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'aceita que poderá laborar em sábados, domingos e feriados, conforme escala divulgada e respeitando a legislação a respeito do tema.',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                alignment: AlignmentType.JUSTIFIED,
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: '4.5 ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'Não será tolerado descumprimentos nas políticas de horários, não podendo atrasar mais que 10 minutos no total por dia e atrasos injustificados. Em caso de faltas, levar o atestado em até 48 horas imediatamente subsequentes. Faltas sem atestados podem ser descontadas na folha de pagamento e poderá ser aplicada advertência.',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                alignment: AlignmentType.JUSTIFIED,
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: '4.6 ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'Ao funcionário é vedado realizar jornada extraordinária sem autorização da direção.',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                alignment: AlignmentType.JUSTIFIED,
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: '4.7 ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'É vedado ao funcionário, em qualquer hipótese, realizar repouso intrajornada inferior a 1 (uma) hora.',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                alignment: AlignmentType.JUSTIFIED,
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: '4.8 ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'As folgas poderão ser participadas pelo funcionário, entretanto, somente serão concedidas por expressa previsão da direção.',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                alignment: AlignmentType.JUSTIFIED,
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    before: 200,
-                    line: 276,
-                },
-                children: [
-                    new TextRun({
-                        text: '4.9 ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'As ditas folgas somente serão concedidas caso o colaborador tenha saldo positivo de horas ou caso se trate de folga compensatória de feriados, sendo vedado banco de horas negativo.',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
+            createShiftContent(user, leadership).then(console.log('concluiu shiftcontent')),  
             createClauseHeader('CLÁUSULA V - DOS DESCONTOS'),
             new Paragraph({
                 indent: {
@@ -2590,172 +4048,7 @@ async function createNewSection(user, doc){
                 ],
             }),
             createClauseHeader('CLÁUSULA VI - DO LOCAL DE TRABALHO'),
-            new Paragraph({
-                alignment: AlignmentType.JUSTIFIED,
-
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: '6.1 ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'O(A) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'desempenhará suas funções, já estabelecidas no presente contrato, ao(à) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADOR(A)',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: `no seguinte endereço: ${capitalizeString(user.address.address)}, nº ${user.address.number}, complemento: ${user.address.complement ? capitalizeString(user.address.complement) : 'Não informado'}, ${capitalizeString(user.address.neighborhood)}, ${user.address.city.name}, ${user.address.state.name}, CEP: ${user.address.postal_code}.`,
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                    alignment: AlignmentType.JUSTIFIED,
-
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: '6.2 ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'O(A) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADOR(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'poderá transferir o(a) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'entre, filiais, unidades do mesmo grupo econômico ou caso haja mudança de endereço da empresa, sem pagamento de qualquer adicional, desde que a mudança não importe a alteração do domicílio.',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                    alignment: AlignmentType.JUSTIFIED,
-
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: '6.3 ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'Caso o(a) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'seja promovido a cargo de confiança, a vedação presente na cláusula anterior não se aplica, podendo o mesmo ser transferido, independente da alteração de domicílio, tendo em vista a natureza do cargo.',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                    alignment: AlignmentType.JUSTIFIED,
-
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: '6.4 ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'Durante a vigência deste contrato, o(a) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A) ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'poderá ser transferido de forma provisória ou definitiva, para exercer sua função em localidade diversa daquela acima indicada, havendo mudança de domicílio, desde que haja a sua anuência ou que sejam verificadas as hipóteses legais tal como previsto no artigo 469 da Consolidação das Leis do Trabalho.',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
+            ...createLaborPlace(user, leadership),
             createClauseHeader('CLÁUSULA VII - DAS OBRIGAÇÕES DAS PARTES'),
             new Paragraph({
                     alignment: AlignmentType.JUSTIFIED,
@@ -2808,7 +4101,7 @@ async function createNewSection(user, doc){
                     }),
                     new TextRun({
                         size: 24,
-                        text: 'O(A) EMPREGADOR(A) deverá pagar ao(a) EMPREGADO(A) os valores previstos na Cláusula Terceira, dentro do prazo e da forma previamente indicada, a título salCalibri Light;',
+                        text: 'O(A) EMPREGADOR(A) deverá pagar ao(a) EMPREGADO(A) os valores previstos na Cláusula Terceira, dentro do prazo e da forma previamente indicada, a título salarial Light;',
                         font: "Calibri Light",
                     }),
                 ],
@@ -2926,7 +4219,7 @@ async function createNewSection(user, doc){
                 },
                 children: [
                     new TextRun({
-                        text: '7.1 ',
+                        text: '7.2 ',
                         size: 24,
                         bold: true,
                         font: "Calibri Light",
@@ -2945,8 +4238,7 @@ async function createNewSection(user, doc){
                 ],
             }),
             new Paragraph({
-                    alignment: AlignmentType.JUSTIFIED,
-
+                alignment: AlignmentType.JUSTIFIED,
                 indent: {
                     left: convertInchesToTwip(0.5),
                     right: convertInchesToTwip(0.5),
@@ -3912,264 +5204,767 @@ async function createNewSection(user, doc){
                     }),
                 ],
             }), 
-            createClauseHeader('CLÁUSULA XII - DAS DISPOSIÇÕES GERAIS'),
-            new Paragraph({
-                    alignment: AlignmentType.JUSTIFIED,
-
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 200,
-                },
-                children: [
-                    new TextRun({
-                        text: '12.1  ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'Fica o(a) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A), ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'comunicado e ciente que durante a permanência no local de trabalho está sendo monitorado por câmeras de segurança que possuem gravações de áudio e vídeo.',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                    alignment: AlignmentType.JUSTIFIED,
-
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 300,
-                },
-                children: [
-                    new TextRun({
-                        text: '12.2  ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'O(A) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADOR(A), ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'poderá fiscalizar e ter acesso a qualquer informação constante nos softwares utilizados no ambiente laborativo, inclusive se utilizando de programas de monitoramento.',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                    alignment: AlignmentType.JUSTIFIED,
-
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 300,
-                },
-                children: [
-                    new TextRun({
-                        text: '12.3  ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'Conforme dispõe a CLT em seu art.2º, é o(a) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADOR(A), ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'quem dirige a prestação pessoal de serviço. Assim, fica estipulado que é expressamente proibida a utilização de celular pessoal ou de outro aparelho eletrônico que se assemelhe (tablet, smartwatch, etc.) durante a jornada de trabalho para tratar de qualquer assunto de interesse pessoal do funcionário.',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                    alignment: AlignmentType.JUSTIFIED,
-
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 300,
-                },
-                children: [
-                    new TextRun({
-                        text: '12.4  ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'É vedado ao(a) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A), ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'receber qualquer tipo de contraprestação, comissões, glosas, gorjetas de fornecedores, clientes ou terceiros, sem o consentimento expresso do(a) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADOR(A), ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                    alignment: AlignmentType.JUSTIFIED,
-
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 300,
-                },
-                children: [
-                    new TextRun({
-                        text: '12.5  ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'O(A) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A), ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'autoriza o uso de sua imagem e voz, em todo e qualquer material entre fotos, documentos e outros meios de comunicação, para campanhas promocionais e institucionais. A presente autorização é concedida a título gratuito, abrangendo o uso da imagem acima mencionada em todo território nacional e no exterior, sob qualquer forma e meios, ou sejam, em destaque: (I) out-door; (II) bus-door; folhetos em geral (encartes, mala direta, catálogo, etc.); (III) folder de apresentação; (IV) anúncios em revistas e jornais em geral; (V) home page; (VI) cartazes; (VII) back-light; (VIII) mídia eletrônica (painéis, vídeo-tapes, televisão, cinema, programa para rádio, entre outros); (IX) redes e mídias sociais. ',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                    alignment: AlignmentType.JUSTIFIED,
-
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 300,
-                },
-                children: [
-                    new TextRun({
-                        text: '12.6  ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'Fica proibido tratar de trabalho após o expediente em qualquer meio telemático.',
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
-            new Paragraph({
-                    alignment: AlignmentType.JUSTIFIED,
-
-                indent: {
-                    left: convertInchesToTwip(0.5),
-                    right: convertInchesToTwip(0.5),
-                },
-                spacing: {
-                    line: 276,
-                    before: 300,
-                },
-                children: [
-                    new TextRun({
-                        text: '12.7  ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'E por estarem em pleno acordo, as partes contratantes assinam o presente Contrato de Experiência em duas vias, ficando a primeira em poder do(a) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADOR(A), ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        size: 24,
-                        text: 'e a segunda com o(a) ',
-                        font: "Calibri Light",
-                    }),
-                    new TextRun({
-                        text: 'EMPREGADO(A), ',
-                        size: 24,
-                        bold: true,
-                        font: "Calibri Light",
-                    }),
-                ],
-            }),
+            ...createLastClausesConditional(),
             ...createTimeStamp(user),
         ],
     }
     doc.addSection(section);
 }
 
-module.exports = {createCompanyTextRun, createEmployeeTextRun, createAttributionsSection, createClauseWithParagraphs, createEpiProductsTable, getSkillProducts, createEpiTable, countDays, createXPContract, createClauseHeader, createSignSection, createRenew, createNewSection, createPageHeader, createPageFooter}
+// ARQUIVO DE AJUDANTE DE OBRA
+async function getSkillExams(id){
+    try {
+        const response = await axios.get(`https://3337-avanciconstru-apiserver-liom39gdw1s.ws-us114.gitpod.io/skillclinic?skill_id=${id}`, {
+            headers: {
+            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTgwNTA5NjksImV4cCI6MTc2OTg5MDk2OSwic3ViIjoiZjM1ZDg2M2QtMmI4My00MGM4LWI4ZDUtM2ExNzU5YTU2NTc2In0.RVOvNkHAqsTmp_iRfvu28sbeMbwfauCA4E7_7fWpp78`
+        }});
+        return response.data;
+    } catch (error) {
+        console.error('erro no get skill exam')
+        console.log(error.data);
+        return null;
+    }
+}
+
+async function createExamsParagraphs(user){
+    const response = await getSkillExams(user.skill.id);
+    console.log('response', response);
+    var paragraphs = [];
+    response.forEach((exam, index)=> {
+        paragraphs.push( 
+            new Paragraph({
+            children: [
+                new TextRun({
+                    text: `${index + 1}. ${exam.clinical_examination.name.toUpperCase()}`,
+                    size: 22,
+                    font: "Calibri",
+                }),
+            ],
+        }))
+    })
+    console.log('paragraphs',paragraphs);
+    return paragraphs;
+}
+
+function createEnvironmentsParagraphs(user){
+    var paragraphs = [];
+    user.skill.environments.forEach((env)=> {
+        console.log(env);
+        paragraphs.push( 
+            new Paragraph({
+            children: [
+                new TextRun({
+                    text: `- ${env}`,
+                    size: 22,
+                    font: "Calibri",
+                }),
+            ],
+        }))
+    })
+    console.log('paragraphs',paragraphs);
+    return paragraphs;
+}
+
+async function createPersonalDataTable(company, user, doc, contractType){
+    const examParagraphs = await createExamsParagraphs(user);
+    const section = {
+        properties: {
+            type: SectionType.CONTINUOUS,
+            page:{
+                margin: {
+                    top: 800,     
+                    right: 800,   
+                    bottom: 800,  
+                    left: 800    
+                },
+                borders:{
+                    pageBorderBottom: {
+                        style: BorderStyle.SINGLE,
+                        size: 1*8,
+                        color: '000000',
+                    },
+                    pageBorderLeft: {
+                        style: BorderStyle.SINGLE,
+                        size: 1*8,
+                        color: '000000',
+                    },
+                    pageBorderRight: {
+                        style: BorderStyle.SINGLE,
+                        size: 1*8,
+                        color: '000000',
+                    },
+                    pageBorderTop: {
+                    style: BorderStyle.SINGLE,
+                    size: 1*8,
+                    color: '000000',
+                    },
+                    
+                    pageBorders: {
+                    display: "allPages", 
+                    offsetFrom: "text", 
+                    zOrder: "front"
+                    }
+                }
+            },
+        },
+        children:[
+            new Table({
+                columnWidths: [5000, 5000],
+                width: {
+                    size: 10000,
+                    type: WidthType.DXA,
+                },
+                rows: [
+                    new TableRow({
+                        cantSplit: true,
+                        tableHeader: true,
+                        children: [
+                            new TableCell({
+                                margins: {
+                                    top: convertInchesToTwip(0.1),
+                                    bottom: convertInchesToTwip(0.1),
+                                    left: convertInchesToTwip(0.1),
+                                    right: convertInchesToTwip(0.1),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                columnSpan: 2,
+                                children: [
+                                    new Paragraph({
+                                        children: [
+                                            new TextRun({
+                                                text: "RAZÃO SOCIAL: ",
+                                                bold: true,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                            new TextRun({
+                                                text: `${company==='HABIT' ? 'HABIT CONSTRUÇÕES E SERVIÇOS EIRELLI' : 'AVANCI'}`,
+                                                size: 22,
+                                                font: "Calibri",
+                                            })
+                                        ],
+                                    }),
+                                    new Paragraph({
+                                        children: [
+                                            new TextRun({
+                                                text: "CNPJ: ",
+                                                bold: true,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                            new TextRun({
+                                                text: `${company==='HABIT' ? '28.697.934/0001-43' : 'AVANCI'}`,
+                                                size: 22,
+                                                font: "Calibri",
+                                            })
+                                        ],
+                                    }),
+                                ],
+                            }),
+                        ],
+                    }),
+                    new TableRow({
+                        cantSplit: true,
+                        tableHeader: true,
+                        children: [
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                borders: {
+                                    bottom: {
+                                        color: "ffffff",
+                                    },
+                                },
+                                children: [
+                                    new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        children: [
+                                            new TextRun({
+                                                text: "Responsável pelo encaminhamento: LARISSA K. RAMOS MAGALHÃES ",
+                                                bold: true,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                        ],
+                                    })
+                                ],
+                            }),
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                borders: {
+                                    bottom: {
+                                        color: "ffffff",
+                                    },
+                                },
+                                children: [
+                                    new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        children: [
+                                            new TextRun({
+                                                text: `Data: ${moment().format('DD/MM/YYYY')}`,
+                                                bold: true,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                        ],
+                                    })
+                                ],
+                            }),
+                        ],
+                    }),
+                    new TableRow({
+                        cantSplit: true,
+                        tableHeader: true,
+                        children: [
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                borders: {
+                                    bottom: {
+                                        color: "ffffff",
+                                    },
+                                },
+                                columnSpan: 2,
+                                children: [
+                                    new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        children: [
+                                            new TextRun({
+                                                text: `ATENÇÃO: Para exames de sangue estar em jejum`,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                        ],
+                                    }),
+                                    new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        children: [
+                                            new TextRun({
+                                                text: `LEVAR DOCUMENTO COM FOTO`,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                        ],
+                                    })
+                                ],
+                            }),
+                        ],
+                    }),
+                    new TableRow({
+                        cantSplit: true,
+                        tableHeader: true,
+                        children: [
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                columnSpan: 2,
+                                children: [
+                                    new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        children: [
+                                            new TextRun({
+                                                text: `DADOS PESSOAIS`,
+                                                bold: true,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                        ],
+                                    }),
+                                ],
+                            }),
+                        ],
+                    }),
+                ],
+            }),
+            new Paragraph({text: ''}),
+            new Table({
+                columnWidths: [5000, 5000],
+                width: {
+                    size: 10000,
+                    type: WidthType.DXA,
+                },
+                rows: [
+                    new TableRow({
+                        cantSplit: true,
+                        tableHeader: true,
+                        children: [
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                borders: {
+                                    bottom: {
+                                        color: "ffffff",
+                                    },
+                                },
+                                columnSpan: 4,
+                                children: [
+                                    new Paragraph({
+                                        children: [
+                                            new TextRun({
+                                                text: "NOME COMPLETO: ",
+                                                bold: true,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                            new TextRun({
+                                                text: `${user.name}`,
+                                                size: 22,
+                                                font: "Calibri",
+                                            })
+                                        ],
+                                    }),
+                                ],
+                            }),
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {
+                                    value: 50, 
+                                    type: WidthType
+                                },
+                                borders: {
+                                    bottom: {
+                                        color: "ffffff",
+                                    },
+                                },
+                                columnSpan: 2,
+                                children: [
+                                    new Paragraph({
+                                        children: [
+                                            new TextRun({
+                                                text: "RG: ",
+                                                bold: true,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                            new TextRun({
+                                                text: `${user.rg ? user.rg : ''}`,
+                                                size: 22,
+                                                font: "Calibri",
+                                            })
+                                        ],
+                                    }),
+                                    new Paragraph({
+                                        children: [
+                                            new TextRun({
+                                                text: "CPF: ",
+                                                bold: true,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                            new TextRun({
+                                                text: `${user.cpf}`,
+                                                size: 22,
+                                                font: "Calibri",
+                                            })
+                                        ],
+                                    }),
+                                    new Paragraph({
+                                        children: [
+                                            new TextRun({
+                                                text: "DATA DE NASCIMENTO ",
+                                                bold: true,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                            new TextRun({
+                                                text: `${moment(user.birthday).format('DD/MM/YYYY')}`,
+                                                size: 22,
+                                                font: "Calibri",
+                                            })
+                                        ],
+                                    }),
+                                ],
+                            }),
+                        ],
+                    }),
+                    new TableRow({
+                        cantSplit: true,
+                        tableHeader: true,
+                        children: [
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                borders: {
+                                    bottom: {
+                                        color: "ffffff",
+                                    },
+                                },
+                                columnSpan: 6,
+                                children: [
+                                    new Paragraph({
+                                        children: [
+                                            new TextRun({
+                                                text: "Cargo: ",
+                                                bold: true,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                            new TextRun({
+                                                text: `${user.skill.name} - CBO: ${user.skill.cbo}`,
+                                                size: 22,
+                                                font: "Calibri",
+                                            })
+                                        ],
+                                    }),
+                                ],
+                            }),
+                        ],
+                    }),
+                    new TableRow({
+                        cantSplit: true,
+                        tableHeader: true,
+                        children: [
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                borders: {
+                                    bottom: {
+                                        color: "ffffff",
+                                    },
+                                },
+                                columnSpan: 6,
+                                children: [
+                                    new Paragraph({
+                                        children: [
+                                            new TextRun({
+                                                text: "Ambientes: ",
+                                                bold: true,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                            ...createEnvironmentsParagraphs(user),
+                                        ],
+                                    }),
+                                ],
+                            }),
+                        ],
+                    }),
+                    new TableRow({
+                        cantSplit: true,
+                        tableHeader: true,
+                        children: [
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                borders: {
+                                    bottom: {
+                                        color: "ffffff",
+                                    },
+                                },
+                                children: [
+                                    new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        children: [
+                                            new TextRun({
+                                                text: "Admissional: ",
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                        ],
+                                    }),
+                                ],
+                            }),
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                borders: {
+                                    bottom: {
+                                        color: "ffffff",
+                                    },
+                                },
+                                children: [],
+                            }),
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                borders: {
+                                    bottom: {
+                                        color: "ffffff",
+                                    },
+                                },
+                                children: [
+                                    new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        children: [
+                                            new TextRun({
+                                                text: "Mudança de riscos: ",
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                        ],
+                                    }),
+                                ],
+                            }),
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                borders: {
+                                    bottom: {
+                                        color: "ffffff",
+                                    },
+                                },
+                                children: [],
+                            }),
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                borders: {
+                                    bottom: {
+                                        color: "ffffff",
+                                    },
+                                },
+                                children: [
+                                    new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        children: [
+                                            new TextRun({
+                                                text: "Periódico",
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                        ],
+                                    }),
+                                ],
+                            }),
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                borders: {
+                                    bottom: {
+                                        color: "ffffff",
+                                    },
+                                },
+                                children: [
+                                    new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        children: [
+                                            new TextRun({
+                                                text: "Retorno ao trabalho",
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                        ],
+                                    }),
+                                ],
+                            }),
+                        ],
+                    }),
+                    new TableRow({
+                        cantSplit: true,
+                        tableHeader: true,
+                        children: [
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                children: [
+                                    new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        children: [
+                                            new TextRun({
+                                                text: `${contractType === 'Admission' ? 'X' : ''}`,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                        ],
+                                    }),
+                                ],
+                            }),
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                children: [],
+                            }),
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                children: [
+                                    new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        children: [
+                                            new TextRun({
+                                                text: `${contractType === 'RiskChange' ? 'X' : ''}`,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                        ],
+                                    }),
+                                ],
+                            }),
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                children: [],
+                            }),
+                            new TableCell({
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                children: [
+                                    new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        children: [
+                                            new TextRun({
+                                                text: `${contractType === 'Periodical' ? 'X' : ''}`,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                        ],
+                                    }),
+                                ],
+                            }),
+                            new TableCell({
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                children: [
+                                    new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        children: [
+                                            new TextRun({
+                                                text: `${contractType === 'Return' ? 'X' : ''}`,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                        ],
+                                    }),
+                                ],
+                            }),
+                        ],
+                    }),
+                    new TableRow({
+                        cantSplit: true,
+                        tableHeader: true,
+                        children: [
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                columnSpan: 6,
+                                children: [
+                                    new Paragraph({
+                                        alignment: AlignmentType.CENTER,
+                                        children: [
+                                            new TextRun({
+                                                text: "EXAMES COMPLEMENTARES A REALIZAR:",
+                                                bold: true,
+                                                size: 22,
+                                                font: "Calibri",
+                                            }),
+                                        ],
+                                    }),
+                                ],
+                            }),
+                        ],
+                    }),
+                    new TableRow({
+                        cantSplit: true,
+                        tableHeader: true,
+                        children: [
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {value: 50, type: WidthType},
+                                columnSpan: 4,
+                                children: examParagraphs,
+                            }),
+                            new TableCell({
+                                margins:{
+                                    left: convertInchesToTwip(0.2),
+                                    right: convertInchesToTwip(0.2),
+                                },
+                                tableHeader: true,
+                                height: {
+                                    value: 50, 
+                                    type: WidthType
+                                },
+                                columnSpan: 2,
+                                children: [],
+                            }),
+                        ],
+                    }),
+                ],
+            })
+        ]
+    }
+    doc.addSection(section);
+}
+
+module.exports = {createCompanyTextRun, createEmployeeTextRun, createAttributionsSection, createClauseWithParagraphs, createEpiProductsTable, getSkillProducts, createEpiTable, countDays, createXPContract, createClauseHeader, createSignSection, createRenew, createNewSection, createPageHeader, createPageFooter, createPaymentContent, createPersonalDataTable, createExamsParagraphs, createEnvironmentsParagraphs}

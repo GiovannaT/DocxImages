@@ -1,0 +1,76 @@
+[
+	{
+		"id": "ac8d2f96-e21d-430f-80dc-2398a92a46e9",
+		"name": "FARTEC FABRICA DE ARTEFATOS DE CIMENTO LTDA",
+		"razao_social": "FARTEC FABRICA DE ARTEFATOS DE CIMENTO LTDA",
+		"email": "marcia@dapare.com.br",
+		"phone": "6599580991",
+		"phones": [
+			"6599580991"
+		],
+		"whatsapp": "6599580991",
+		"type": null,
+		"distribution_model": null,
+		"segments": null,
+		"cnpj": "1527660100010",
+		"cnpjs": [
+			"1527660100010"
+		],
+		"cpf": null,
+		"active": true,
+		"created_at": "2022-06-30T08:57:10.000Z",
+		"updated_at": "2023-12-18T15:08:31.000Z",
+		"bank_account": {
+			"id": "7c25063c-66bd-457d-8f1d-48e868cbbc0b",
+			"pix_type": "CPF",
+			"pix": "30129630659",
+			"bank_code": null,
+			"bank_name": null,
+			"operation": null,
+			"tax_number": null,
+			"account_owner": "Altair Divino Borges",
+			"type": "Corrente",
+			"account": null,
+			"agency": null,
+			"active": true,
+			"user_id": null,
+			"salary_id": null,
+			"company_id": "ac8d2f96-e21d-430f-80dc-2398a92a46e9",
+			"created_at": "2022-06-30T08:57:10.000Z",
+			"updated_at": "2022-06-30T08:57:10.000Z"
+		},
+		"address": {
+			"id": "86fbe21d-4e75-47fa-ac57-f856ae02c566",
+			"address": "Rodovia Palmiro Paes de Barros",
+			"postal_code": "78090700",
+			"neighborhood": "N. S. APARECIDA",
+			"iptu": null,
+			"number": "KM1",
+			"active": true,
+			"complement": null,
+			"city_id": "a7165d34-09f7-4133-851a-66dbd2a52542",
+			"state_id": 11,
+			"created_at": "2022-06-30T08:57:10.000Z",
+			"updated_at": "2022-06-30T08:57:10.000Z",
+			"user_id": null,
+			"company_id": "ac8d2f96-e21d-430f-80dc-2398a92a46e9",
+			"place_id": null,
+			"city": {
+				"id": "a7165d34-09f7-4133-851a-66dbd2a52542",
+				"name": "Cuiabá",
+				"active": true,
+				"state_id": 11,
+				"created_at": "2020-11-23T05:31:27.174Z",
+				"updated_at": "2020-11-23T05:31:27.174Z"
+			},
+			"state": {
+				"id": 11,
+				"name": "Mato Grosso",
+				"uf": "MT",
+				"active": true,
+				"created_at": "2020-11-23T05:31:27.174Z",
+				"updated_at": "2020-11-23T05:31:27.174Z"
+			}
+		}
+	}
+]

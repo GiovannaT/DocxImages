@@ -12,22 +12,9 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
     }
 
     let user = JSON.parse(data);
+    const company = 'HABIT'
 
-    // const getCompany = async () => {
-    //     try {
-    //         const response = await axios.get(`https://3337-avanciconstru-apiserver-0ae2jz7xl1m.ws-us110.gitpod.io/company?id=${company[0].company_id}`, {
-    //             headers: {
-    //             'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTUyNjA5OTMsImV4cCI6MTc2NzEwMDk5Mywic3ViIjoiZjM1ZDg2M2QtMmI4My00MGM4LWI4ZDUtM2ExNzU5YTU2NTc2In0.EepQV0WVRYNQLQp2sPDhJU_Cm34c2rDFPuq0I_fqpDI`
-    //         }});
-    //         return response.data[0];
-
-    //     } catch (error) {
-    //         console.error('erro getcompany')
-    //         return null;
-    //     }
-    // }
-
-    const { Document, Packer, Paragraph, TextRun, ImageRun, Header, Footer, AlignmentType, BorderStyle, convertInchesToTwip} = docx;
+    const { Document, Packer, Paragraph, TextRun, Header, Footer, AlignmentType, BorderStyle, convertInchesToTwip} = docx;
 
     const doc = new Document({
         creator: "Usuário criador",
@@ -37,14 +24,14 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
             headers: {
                 default: new Header({ 
                     children: [
-                        createPageHeader('AVANCI')
+                        createPageHeader(company)
                     ],
                 }),
             },
             footers: {
                 default: new Footer({
                     children: [
-                       ...createPageFooter('AVANCI')
+                       ...createPageFooter(company)
                     ],
                 }),
             },
@@ -231,9 +218,9 @@ fs.readFile(caminhoParaJson, 'utf8', async (err, data) => {
     
     createAttributionsSection(user.skill.assignments, doc),
     await createNewSection(user, doc);
-    createSignSection(user, doc, 'AVANCI');
+    createSignSection(user, doc, company);
     createRenew(user, doc),
-    createSignSection(user, doc, 'AVANCI');
+    createSignSection(user, doc, company);
     
     Packer.toBuffer(doc).then((buffer) => {
         fs.writeFileSync("ContratoExperiência.docx", buffer);
